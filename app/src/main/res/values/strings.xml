@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">NovelSeries</string>
+    <string name="default_web_client_id">500562423973-88gd9am45qji3q699c64lguapeidseqs.apps.googleusercontent.com</string>
+    <string name="placeholder_terms_conditions">These are the terms and conditions for using our app.\n\n1. Acceptance of Terms: By accessing or using our application, you agree to be bound by these Terms and Conditions and all policies referenced herein.\n\n2. User Conduct: You agree not to use the application for any unlawful purpose or in any way that might harm, disrupt, or impair the application or its users.\n\n3. Intellectual Property: All content, trademarks, and intellectual property rights in the application are owned by [Your Company Name] or its licensors.\n\n4. Disclaimers: The application is provided \"as is\" without any warranties, express or implied.\n\n5. Limitation of Liability: [Your Company Name] shall not be liable for any direct, indirect, incidental, special, or consequential damages arising out of or in any way connected with your use of the application.\n\n6. Governing Law: These Terms and Conditions shall be governed by and construed in accordance with the laws of [Your Jurisdiction].</string>
+    <string name="placeholder_privacy_policy">This Privacy Policy describes how your personal information is collected, used, and shared when you visit or make a purchase from our application.\n\n1. Information We Collect: We collect various types of information, including personal information you provide directly, and usage data collected automatically as you interact with our application.\n\n2. How We Use Your Information: We use the collected information to provide and improve our services, personalize your experience, communicate with you, and for security purposes.\n\n3. Sharing Your Information: We do not share your personal information with third parties except as necessary to provide our services, comply with law, or protect our rights.\n\n4. Data Security: We implement appropriate technical and organizational measures to protect your personal data against accidental or unlawful destruction, loss, alteration, unauthorized disclosure, or access.\n\n5. Your Rights: You have the right to access, correct, or delete your personal data. Please contact us to exercise these rights.\n\n6. Changes to This Policy: We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page.</string>
+    <string name="placeholder_refund_policy">Our Refund Policy outlines the conditions under which refunds are provided for purchases made through our application.\n\n1. Eligibility for Refund: Refunds are only available for purchases made within [Number] days of the transaction date, and only if the service or digital content has not been fully consumed or used.\n\n2. Non-Refundable Items: Certain items or services may be non-refundable, as specified at the time of purchase. These may include, but are not limited to, [Specific Non-Refundable Items].\n\n3. How to Request a Refund: To request a refund, please contact our support team at [Support Email/Contact] for assistance with cancelling specific services.\n\n4. Processing Refunds: Once your refund request is approved, the refund will be processed and a credit will automatically be applied to your original method of payment, within [Number] business days.\n\n5. Cancellation of Services: If you cancel a subscription service, you will continue to have access to the service until the end of your current billing period, and no partial refunds will be issued for the unused portion of the subscription term.\n\n6. Changes to Policy: We reserve the right to modify this refund policy at any time. Any changes will be posted on this page.</string>
+    <string name="placeholder_cancellation_policy">Our Cancellation Policy describes how you can cancel services or subscriptions within our application.\n\n1. Subscription Cancellation: You can cancel your subscription at any time through your account settings in the application. Your subscription will remain active until the end of your current billing cycle, and you will not be charged for subsequent billing periods.\n\n2. Service Cancellation: For one-time services or purchases, cancellation may be possible depending on the service\'s status. Please contact support at [Support Email/Contact] for assistance with cancelling specific services.\n\n3. No Partial Refunds: We do not offer partial refunds for cancelled subscriptions or services. You will retain access to the service for the remainder of the period for which you have already paid.\n\n4. Effect of Cancellation: Upon cancellation, you may lose access to premium features or content associated with the subscription or service.\n\n5. Policy Changes: We reserve the right to modify this cancellation policy. Any changes will be posted on this page.</string>
+    <string name="placeholder_about_us">Welcome to NovelSeries!\n\nWe are passionate about bringing stories to life and connecting readers with talented writers from around the globe. Our platform is dedicated to fostering a vibrant community where creativity thrives and diverse narratives find their audience.\n\nAt NovelSeries, we believe in the power of storytelling to inspire, entertain, and educate. Whether you\'re a seasoned author or an aspiring writer, our tools and features are designed to help you craft compelling novels and share them with an engaged readership.\n\nFor readers, NovelSeries offers a vast library of genres, from thrilling mysteries to heartwarming romances, epic fantasies, and thought-provoking non-fiction. Discover new voices, follow your favorite authors, and immerse yourself in captivating worlds.\n\nOur mission is to empower writers to achieve their dreams and provide readers with endless opportunities for discovery. Join us on this exciting journey and be a part of the NovelSeries community!</string>
+
+    <!-- Help & Support -->
+    <string name="help">Help &amp; Support</string>
+    <string name="get_in_touch">Get in Touch</string>
+    <string name="have_a_suggestion">Have a suggestion, a complaint, or an issue? We\'re here to help.</string>
+    <string name="email">Email</string>
+    <string name="find_us_on_social_media">Find us on social media</string>
+
+    <string name="notifications">Notifications</string>
+    <string name="no_notifications">No notifications yet</string>
+
+    <string name="income">Income</string>
+    <string name="view_full_screen">View Full Screen</string>
+
+    <string name="undo">Undo</string>
+    <string name="redo">Redo</string>
+    <string name="load_more_chapters">Load More Chapters</string>
+
+    <!-- Chapter Unlocking -->
+    <string name="unlock_chapter">Unlock chapter with %1$s Points or %2$s Diamond(s)</string>
+    <string name="unlock_with_points">Unlock with %1$s points</string>
+    <string name="unlock_with_diamonds">Unlock with %1$s diamonds</string>
+    <string name="not_enough_balance">Insufficient balance</string>
+    <string name="watch_ad_to_unlock">Watch ad to unlock</string>
+    <string name="come_tomorrow">Check back tomorrow for more</string>
+    <string name="premium_text">This is a premium story; please use diamonds to unlock.</string>
+    <string name="send_gift">Send Gift</string>
+</resources>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2026 Aman AJ. All rights reserved.
+  -->
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:padding="16dp">
+
+    <!-- Big Rank Number Background (Watermark) -->
+    <TextView
+        android:id="@+id/tvRankBg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="0.1"
+        android:fontFamily="sans-serif-black"
+        android:includeFontPadding="false"
+        android:text="1"
+        android:textColor="?attr/colorOnSurface"
+        android:textSize="140sp"
+        app:layout_constraintBottom_toBottomOf="@id/cardCover"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/cardCover" />
+
+    <!-- Novel Cover Card -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardCover"
+        android:layout_width="140dp"
+        android:layout_height="210dp"
+        android:layout_marginStart="32dp"
+        app:cardBackgroundColor="?attr/colorSurfaceVariant"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/ivNovelCover"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            tools:src="@tools:sample/backgrounds/scenic" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Rank Text (Primary Pink) -->
+    <TextView
+        android:id="@+id/tvRank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="sans-serif-black"
+        android:text="#1"
+        android:textColor="?attr/colorPrimary"
+        android:textSize="24sp"
+        app:layout_constraintStart_toEndOf="@id/cardCover"
+        app:layout_constraintTop_toTopOf="@id/cardCover" />
+
+    <!-- Novel Title -->
+    <TextView
+        android:id="@+id/tvNovelTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:fontFamily="sans-serif-medium"
+        android:maxLines="3"
+        android:textColor="?attr/colorOnSurface"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/tvRank"
+        app:layout_constraintTop_toBottomOf="@id/tvRank"
+        tools:text="The Immortal's Journey to the Heavens" />
+
+    <!-- Author Name -->
+    <TextView
+        android:id="@+id/tvAuthor"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="?attr/colorOnSurfaceVariant"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/tvRank"
+        app:layout_constraintTop_toBottomOf="@id/tvNovelTitle"
+        tools:text="by Author" />
+
+    <!-- Lottie Badge -->
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieTrending"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="-12dp"
+        app:layout_constraintStart_toStartOf="@id/tvAuthor"
+        app:layout_constraintTop_toBottomOf="@id/tvAuthor"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/trending_one" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

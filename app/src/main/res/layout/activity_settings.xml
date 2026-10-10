@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2026 Aman AJ. All rights reserved.
+  ~
+  -->
+
+<!--
+  Settings: grouped cards of rows (coloured icon tile, label, chevron). Row ids are unchanged
+  so SettingsActivity keeps its click handling.
+-->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
+    tools:context=".SettingsActivity">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="?attr/colorSurface"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIconTint="?attr/colorOnSurface"
+        app:titleTextAppearance="@style/TextAppearance.NovelSerise.PageTitle"
+        app:titleTextColor="?attr/colorOnSurface" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="24dp">
+
+            <!-- Preferences -->
+            <TextView
+                style="@style/SettingsSectionLabel"
+                android:layout_marginTop="6dp"
+                android:text="PREFERENCES" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_shop_card"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="58dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="14dp"
+                    android:paddingEnd="8dp">
+
+                    <ImageView
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/set_badge_dark" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="14dp"
+                        android:layout_weight="1"
+                        android:text="Dark Mode"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="15sp" />
+
+                    <com.google.android.material.switchmaterial.SwitchMaterial
+                        android:id="@+id/switchTheme"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:thumbTint="@color/writer_switch_thumb"
+                        app:trackTint="@color/writer_switch_track" />
+                </LinearLayout>
+
+                <View style="@style/SettingsDivider" />
+
+                <LinearLayout
+                    android:id="@+id/tvLanguage"
+                    android:layout_width="match_parent"
+                    android:layout_height="58dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="14dp">
+
+                    <ImageView
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/set_badge_language" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="14dp"
+                        android:layout_weight="1"
+                        android:text="Language"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tvLanguageSelected"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="6dp"
+                        android:text="English"
+                        android:textColor="#FF4F8B"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_chevron_right"
+                        app:tint="?attr/colorOnSurfaceVariant" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Account -->
+            <TextView
+                style="@style/SettingsSectionLabel"
+                android:text="ACCOUNT" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_shop_card"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvTransactionHistory"
+                    style="@style/SettingsRow"
+                    android:text="Transaction History"
+                    app:drawableStartCompat="@drawable/set_badge_history" />
+
+                <View style="@style/SettingsDivider" />
+
+                <TextView
+                    android:id="@+id/tvWriterSubscription"
+                    style="@style/SettingsRow"
+                    android:text="Writer Subscription"
+                    app:drawableStartCompat="@drawable/set_badge_writer" />
+
+                <View style="@style/SettingsDivider" />
+
+                <TextView
+                    android:id="@+id/tvSwitchAccount"
+                    style="@style/SettingsRow"
+                    android:text="Switch Account"
+                    app:drawableStartCompat="@drawable/set_badge_switch" />
+            </LinearLayout>
+
+            <!-- Help -->
+            <TextView
+                style="@style/SettingsSectionLabel"
+                android:text="HELP" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_shop_card"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvHelp"
+                    style="@style/SettingsRow"
+                    android:text="Help &amp; Support"
+                    app:drawableStartCompat="@drawable/set_badge_help" />
+
+                <View style="@style/SettingsDivider" />
+
+                <TextView
+                    android:id="@+id/tvReferEarn"
+                    style="@style/SettingsRow"
+                    android:text="Refer &amp; Earn"
+                    app:drawableStartCompat="@drawable/set_badge_refer" />
+            </LinearLayout>
+
+            <!-- Policy -->
+            <TextView
+                style="@style/SettingsSectionLabel"
+                android:text="POLICIES" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_shop_card"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvPolicyTerms"
+                    style="@style/SettingsRow"
+                    android:text="Terms and Conditions"
+                    app:drawableStartCompat="@drawable/set_badge_terms" />
+
+                <View style="@style/SettingsDivider" />
+
+                <TextView
+                    android:id="@+id/tvPolicyPrivacy"
+                    style="@style/SettingsRow"
+                    android:text="Privacy Policy"
+                    app:drawableStartCompat="@drawable/set_badge_privacy" />
+
+                <View style="@style/SettingsDivider" />
+
+                <TextView
+                    android:id="@+id/tvPolicyAboutUs"
+                    style="@style/SettingsRow"
+                    android:text="About Us"
+                    app:drawableStartCompat="@drawable/set_badge_about" />
+
+                <View style="@style/SettingsDivider" />
+
+                <TextView
+                    android:id="@+id/tvPolicyRefund"
+                    style="@style/SettingsRow"
+                    android:text="Refund Policy"
+                    app:drawableStartCompat="@drawable/set_badge_refund" />
+
+                <View style="@style/SettingsDivider" />
+
+                <TextView
+                    android:id="@+id/tvPolicyCancellation"
+                    style="@style/SettingsRow"
+                    android:text="Cancellation Policy"
+                    app:drawableStartCompat="@drawable/set_badge_cancel" />
+            </LinearLayout>
+
+            <!-- Logout -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:background="@drawable/bg_shop_card"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvLogout"
+                    style="@style/SettingsRow"
+                    android:text="Logout"
+                    android:textColor="#F87171"
+                    android:textStyle="bold"
+                    app:drawableStartCompat="@drawable/set_badge_logout" />
+            </LinearLayout>
+
+            <!-- Developer credit -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="28dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/developed_by"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="40dp"
+                    android:layout_marginTop="2dp"
+                    android:alpha="0.7"
+                    android:gravity="center"
+                    android:text="@string/developer_promo"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/tvViewDeveloperProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/bg_section_action"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:gravity="center"
+                    android:paddingHorizontal="14dp"
+                    android:text="@string/view_developer_profile"
+                    android:textColor="#FF4F8B"
+                    android:textSize="12sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2026 Aman AJ. All rights reserved.
+  ~
+  -->
+
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="shimmer_placeholder">#DDDDDD</color>
+
+    <!-- Brand Colors -->
+    <color name="colorPrimary">@color/pink_500</color>
+    <color name="colorPrimaryDark">@color/pink_700</color>
+    <color name="colorAccent">@color/pink_200</color>
+
+    <!-- Blue Palette -->
+    <color name="blue_50">#E3F2FD</color>
+    <color name="blue_100">#BBDEFB</color>
+    <color name="blue_200">#90CAF9</color>
+    <color name="blue_500">#2196F3</color>
+    <color name="blue_700">#1976D2</color>
+    <color name="blue_800">#1565C0</color>
+    <color name="blue_900">#0D47A1</color>
+    <color name="blue_dark_container">#1A237E</color>
+
+    <color name="green_500">#4CAF50</color>
+    <color name="status_ongoing_red">#E53935</color>
+
+    <color name="gray_200">#EEEEEE</color>
+    <color name="gray_300">#BDBDBD</color>
+    <color name="gray_500">#9E9E9E</color>
+    <color name="gray_700">#616161</color>
+    <color name="gray_800">#424242</color>
+    <color name="gray_600">#757575</color>
+
+    <!-- Dark Mode Specific Colors (Navy Palette) -->
+    <color name="navy_900">#0D1B2A</color>
+    <color name="navy_800">#1B263B</color>
+    <color name="navy_700">#415A77</color>
+    <color name="off_white">#F5F5F5</color>
+
+    <!-- Pink Palette (Legacy) -->
+    <color name="pink_10">#FFF0F1</color>
+    <color name="pink_50">#FFECED</color>
+    <color name="pink_200">#F48FB1</color>
+    <color name="pink_500">#E91E63</color>
+    <color name="pink_700">#C2185B</color>
+    <color name="pink_dark_container">#4D1E31</color>
+
+    <color name="novel_app_gold_accent">#C5A562</color>
+    <color name="splash_background">#4A103D</color>
+    <color name="splash_video_background">#000000</color>
+
+    <!-- Home section surfaces -->
+    <color name="home_bg_light_1">#FFF3F7</color>
+    <color name="home_bg_light_2">#F2F6FF</color>
+    <color name="home_bg_light_3">#F2FBF7</color>
+    <color name="home_bg_light_4">#FFF8EE</color>
+    <color name="home_bg_light_5">#F8F3FF</color>
+    <color name="home_bg_light_6">#EFFAFC</color>
+    <color name="home_bg_light_7">#FFF4F0</color>
+    <color name="home_bg_dark_1">#291A22</color>
+    <color name="home_bg_dark_2">#172238</color>
+    <color name="home_bg_dark_3">#162A24</color>
+    <color name="home_bg_dark_4">#2C2418</color>
+    <color name="home_bg_dark_5">#241B32</color>
+    <color name="home_bg_dark_6">#15282D</color>
+    <color name="home_bg_dark_7">#2E201C</color>
+
+    <!-- Shop -->
+    <color name="shop_card">#F5F5F7</color>
+    <color name="shop_card_stroke">#14000000</color>
+    <color name="shop_featured_fill">#FFF8EA</color>
+    <color name="shop_earn_fill">#E9F7EF</color>
+    <color name="shop_earn_stroke">#B9E3CB</color>
+    <color name="shop_gold">#E0A43A</color>
+
+    <!-- Novel detail hero card: author, status and tag text -->
+    <color name="novel_detail_hero_text">#2A2F3A</color>
+
+    <!-- Bottom sheets and options dialog -->
+    <color name="sheet_bg">#FFFFFF</color>
+    <color name="sheet_handle">#D0D5DD</color>
+    <color name="option_card_fill">#F6F7F9</color>
+    <color name="option_card_stroke">#E4E7EC</color>
+    <color name="option_icon_fill">#ECEEF2</color>
+</resources>

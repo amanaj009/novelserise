@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2026 Aman AJ. All rights reserved.
+  -->
+<!-- Language screen art: globe on a rounded gradient tile. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="24dp" />
+            <gradient android:angle="315" android:startColor="#FF4F8B" android:endColor="#7C3AED" />
+        </shape>
+    </item>
+    <item android:width="38dp" android:height="38dp" android:gravity="center" android:drawable="@drawable/ic_set_globe" />
+</layer-list>

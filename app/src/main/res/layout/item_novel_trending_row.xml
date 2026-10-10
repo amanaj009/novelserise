@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2026 Aman AJ. All rights reserved.
+  -->
+<!-- Same size and spacing as the other sections' cards; the rank sits on the cover's bottom-left. -->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="80dp"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="12dp">
+
+    <com.writer_hub.novelserise.ui.custom.CoverImageView
+        android:id="@+id/ivNovelCover"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="2:3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/backgrounds/scenic" />
+
+    <!-- Declared after the cover so it draws on top of it. -->
+    <com.writer_hub.novelserise.ui.custom.OutlinedTextView
+        android:id="@+id/tvRank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginBottom="2dp"
+        android:fontFamily="sans-serif-black"
+        android:includeFontPadding="false"
+        android:paddingHorizontal="3dp"
+        android:shadowColor="#B3000000"
+        android:shadowRadius="8"
+        android:textColor="@android:color/white"
+        android:textSize="44sp"
+        app:layout_constraintBottom_toBottomOf="@id/ivNovelCover"
+        app:layout_constraintStart_toStartOf="@id/ivNovelCover"
+        tools:text="1" />
+
+    <TextView
+        android:id="@+id/tvNovelTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:ellipsize="end"
+        android:fontFamily="sans-serif-medium"
+        android:letterSpacing="0.01"
+        android:maxLines="2"
+        android:textColor="?attr/colorOnSurface"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivNovelCover"
+        tools:text="Novel Title That Is Long" />
+
+    <TextView
+        android:id="@+id/tvAuthor"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="?attr/colorOnSurfaceVariant"
+        android:textSize="11sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvNovelTitle"
+        tools:text="Author Name"
+        tools:visibility="visible" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

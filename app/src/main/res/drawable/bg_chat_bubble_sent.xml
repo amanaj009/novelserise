@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2026 Aman AJ. All rights reserved.
+  -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <gradient android:angle="315" android:startColor="#FF4F8B" android:endColor="#C2185B" />
+    <corners
+        android:bottomLeftRadius="20dp"
+        android:bottomRightRadius="6dp"
+        android:topLeftRadius="20dp"
+        android:topRightRadius="20dp" />
+</shape>

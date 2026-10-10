@@ -1,0 +1,14 @@
+<!--
+  ~ Copyright (c) 2026 Aman AJ. All rights reserved.
+  ~
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:fillColor="@color/pink_500"
+        android:pathData="M4,6H2V20A2,2 0 0,0 4,22H18V20H4M18,2H8A2,2 0 0,0 6,4V16A2,2 0 0,0 8,18H18A2,2 0 0,0 20,16V4A2,2 0 0,0 18,2M18,16H8V4H18V16Z" />
+</vector>

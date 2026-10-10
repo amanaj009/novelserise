@@ -1,0 +1,262 @@
+{
+  "project_info": {
+    "project_number": "500562423973",
+    "project_id": "novel-series",
+    "storage_bucket": "novel-series.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:500562423973:android:4a82f1b5b03ce8f8bedd4c",
+        "android_client_info": {
+          "package_name": "com.app.novelfm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "500562423973-4q5n58m9jbel18icd55emj83t0ra1u67.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.novelfm",
+            "certificate_hash": "2208bf69f22eea890b1aeccdff040561b4039581"
+          }
+        },
+        {
+          "client_id": "500562423973-99cv0mb21mltrn9e9egf7o1be92rsinc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.novelfm",
+            "certificate_hash": "0f740de3f710635cf01c486f017edc1386891b08"
+          }
+        },
+        {
+          "client_id": "500562423973-f3fj8rj2ubh7dh949jnio6ccm74v1a8f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.novelfm",
+            "certificate_hash": "de700ca0a7bb5d0cec4af98ce0133922aa3ff474"
+          }
+        },
+        {
+          "client_id": "500562423973-i9848slv0ljvjhtm6rhpllus9t11dsi2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.novelfm",
+            "certificate_hash": "36ae2b1bccdb291a8203f7fa83f7c26406c47dba"
+          }
+        },
+        {
+          "client_id": "500562423973-j8eb97mq7b750b84j3v9onkfiiaeekhh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.novelfm",
+            "certificate_hash": "a15dd3e09b02a52b49c7d5cefea9aca1d993f6ac"
+          }
+        },
+        {
+          "client_id": "500562423973-loo42fsfin3d2rbpm4r1u87nau1j3ete.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.novelfm",
+            "certificate_hash": "86f78b02ecc81b7ed74fe2c46d8f08445e3e4bcf"
+          }
+        },
+        {
+          "client_id": "500562423973-rni2uahsuhqiucuo3agrcudq7cesq5rq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.novelfm",
+            "certificate_hash": "0a2151fd56ef0b55f5794808d0ec199cc10a8c2a"
+          }
+        },
+        {
+          "client_id": "500562423973-ugeu9ssrbklb5cfq5hiqhl0jfsrtvbph.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.novelfm",
+            "certificate_hash": "c103d1438adf5cdb2224280d9c62f1e11bd7afd1"
+          }
+        },
+        {
+          "client_id": "500562423973-88gd9am45qji3q699c64lguapeidseqs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBL_YGseDJQdjDK619MCNj4l17hbslGtuI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "500562423973-88gd9am45qji3q699c64lguapeidseqs.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "500562423973-aufp8mf0ptutb66obh7qdhecr53jjku0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.app.novelfm"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:500562423973:android:307cd53ad5ee6c57bedd4c",
+        "android_client_info": {
+          "package_name": "com.novel.fm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "500562423973-1mvrqkrrlktsg4c0m5ngahep28g9flup.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.novel.fm",
+            "certificate_hash": "b0d4f0171386608ed02c52e963ab1d2116837c04"
+          }
+        },
+        {
+          "client_id": "500562423973-1tvb0ktj8ggo0bgo7mt7bi38r2jfvg5b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.novel.fm",
+            "certificate_hash": "a15dd3e09b02a52b49c7d5cefea9aca1d993f6ac"
+          }
+        },
+        {
+          "client_id": "500562423973-bf454g8fh0q5mmfsaqomtlqdm2q991e1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.novel.fm",
+            "certificate_hash": "2208bf69f22eea890b1aeccdff040561b4039581"
+          }
+        },
+        {
+          "client_id": "500562423973-gli5glngrgabgk0ock90hu50p6glcnel.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.novel.fm",
+            "certificate_hash": "de700ca0a7bb5d0cec4af98ce0133922aa3ff474"
+          }
+        },
+        {
+          "client_id": "500562423973-pukln7j8pf40oqks2c1g8e0s35cuc5v9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.novel.fm",
+            "certificate_hash": "0a2151fd56ef0b55f5794808d0ec199cc10a8c2a"
+          }
+        },
+        {
+          "client_id": "500562423973-rqigs9qvk3op3g5l2vi478mule0542fe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.novel.fm",
+            "certificate_hash": "36ae2b1bccdb291a8203f7fa83f7c26406c47dba"
+          }
+        },
+        {
+          "client_id": "500562423973-rr7c05jfd0qrakc5e76h1sqmmmo5och4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.novel.fm",
+            "certificate_hash": "c103d1438adf5cdb2224280d9c62f1e11bd7afd1"
+          }
+        },
+        {
+          "client_id": "500562423973-88gd9am45qji3q699c64lguapeidseqs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBL_YGseDJQdjDK619MCNj4l17hbslGtuI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "500562423973-88gd9am45qji3q699c64lguapeidseqs.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "500562423973-aufp8mf0ptutb66obh7qdhecr53jjku0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.app.novelfm"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:500562423973:android:c74a39aa6a6b5d52bedd4c",
+        "android_client_info": {
+          "package_name": "com.shadow.fm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "500562423973-6de2i0e4k41l6l1qstfhp6kg113bcgbl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shadow.fm",
+            "certificate_hash": "2208bf69f22eea890b1aeccdff040561b4039581"
+          }
+        },
+        {
+          "client_id": "500562423973-hmum5hj3i2cjkaq45m6epkslsootk09u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shadow.fm",
+            "certificate_hash": "de700ca0a7bb5d0cec4af98ce0133922aa3ff474"
+          }
+        },
+        {
+          "client_id": "500562423973-la7d33f8h7sdocuicretc4vp0024fpmg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shadow.fm",
+            "certificate_hash": "c103d1438adf5cdb2224280d9c62f1e11bd7afd1"
+          }
+        },
+        {
+          "client_id": "500562423973-88gd9am45qji3q699c64lguapeidseqs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBL_YGseDJQdjDK619MCNj4l17hbslGtuI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "500562423973-88gd9am45qji3q699c64lguapeidseqs.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "500562423973-aufp8mf0ptutb66obh7qdhecr53jjku0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.app.novelfm"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

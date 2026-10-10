@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2026 Aman AJ. All rights reserved.
+  ~
+  -->
+
+<!-- Loading placeholder shaped like item_library_novel. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:background="@drawable/bg_shop_card"
+    android:orientation="horizontal"
+    android:padding="12dp">
+
+    <View
+        android:layout_width="76dp"
+        android:layout_height="114dp"
+        android:background="@drawable/bg_studio_skeleton" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="114dp"
+        android:layout_marginStart="14dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="18dp"
+            android:layout_marginEnd="30dp"
+            android:background="@drawable/bg_studio_skeleton" />
+
+        <View
+            android:layout_width="100dp"
+            android:layout_height="12dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_studio_skeleton" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <View
+            android:layout_width="180dp"
+            android:layout_height="24dp"
+            android:background="@drawable/bg_studio_skeleton" />
+    </LinearLayout>
+</LinearLayout>

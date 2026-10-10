@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2026 Aman AJ. All rights reserved.
+  ~
+  -->
+
+<resources>
+    <!-- Brand Pink Colors (Slightly adjusted for dark mode for better accessibility) -->
+    <color name="colorPrimary">@color/pink_700</color>
+    <color name="pink_500">#F06292</color>
+    <color name="pink_200">#F48FB1</color>
+    <color name="pink_700">#E91E63</color>
+
+    <!-- Gray scale and placeholder overrides for dark mode -->
+    <color name="gray_200">#333333</color>
+    <color name="shimmer_placeholder">#333333</color>
+
+    <!-- Shop -->
+    <color name="shop_card">#121315</color>
+    <color name="shop_card_stroke">#1AFFFFFF</color>
+    <color name="shop_featured_fill">#16120A</color>
+    <color name="shop_earn_fill">#0D1A14</color>
+    <color name="shop_earn_stroke">#1E4A37</color>
+    <color name="shop_gold">#F2C063</color>
+
+    <!-- Novel detail hero card: author, status and tag text -->
+    <color name="novel_detail_hero_text">#FFFFFF</color>
+
+    <!-- Bottom sheets and options dialog -->
+    <color name="sheet_bg">#0F1828</color>
+    <color name="sheet_handle">#3A4B66</color>
+    <color name="option_card_fill">#16223A</color>
+    <color name="option_card_stroke">#26364E</color>
+    <color name="option_icon_fill">#223150</color>
+</resources>

@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2026 Aman AJ. All rights reserved.
+  ~
+  -->
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <application
+        android:name=".MyApplication"
+        android:allowBackup="true"
+        android:allowAudioPlaybackCapture="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.NovelSerise">
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-9309778706280177~9424493363" />
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="default_notifications" />
+
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true"
+            android:theme="@style/Theme.App.Starting">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".AuthActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NovelSerise"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".LanguageSelectionActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NovelSerise" />
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".DashboardActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NovelSerise" />
+
+        <activity
+            android:name=".NovelDetailActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NovelSerise" />
+
+        <activity
+            android:name=".ReadChapterActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NovelSerise" />
+
+        <activity
+            android:name=".PlayChapterActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NovelSerise" />
+
+        <activity
+            android:name=".AudioPlayerActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NovelSerise.PlayerSheet" />
+
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NovelSerise" />
+
+        <activity
+            android:name=".HelpSupportActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NovelSerise" />
+
+        <activity
+            android:name=".ReferEarnActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NovelSerise" />
+
+
+        <activity
+            android:name=".ChapterCommentsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NovelSerise"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".PostCommentActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NovelSerise"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".TransactionHistoryActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NovelSerise" />
+
+        <activity
+            android:name=".PaymentOptionsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NovelSerise" />
+
+        <activity
+            android:name=".UserDetailsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NovelSerise" />
+
+        <activity
+            android:name=".EditProfileActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".MessageActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NovelSerise" />
+
+        <activity
+            android:name=".ChatActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NovelSerise"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".FollowListActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NovelSerise" />
+
+        <activity
+            android:name=".SearchActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NovelSerise"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+
+        <activity
+            android:name=".RewardsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NovelSerise" />
+
+        <activity
+            android:name=".ShopActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NovelSerise" />
+
+        <activity
+            android:name=".MyGiftsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NovelSerise" />
+
+        <activity
+            android:name=".DailyBonusActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NovelSerise" />
+
+        <activity
+            android:name=".EarnCoinsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NovelSerise" />
+
+        <activity
+            android:name=".WriterChapterActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NovelSerise" />
+
+        <activity
+            android:name=".WriterAudioUploadActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NovelSerise"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".ChapterWritingActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NovelSerise"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".CreatePostActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NovelSerise"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".CreateNovelActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NovelSerise"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".CategoryNovelActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NovelSerise" />
+
+        <activity
+            android:name=".ViewAllNovelsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NovelSerise" />
+
+        <activity
+            android:name=".HomeSectionNovelByIdActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NovelSerise" />
+
+        <activity
+            android:name=".ui.subscription.SubscriptionPackActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NovelSerise" />
+
+        <activity
+            android:name=".ui.writerSubscriptionPack.WriterSubscriptionPackActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NovelSerise" />
+
+        <activity
+            android:name=".NovelStatsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NovelSerise" />
+
+        <activity
+            android:name=".NovelGiftsActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NovelSerise" />
+
+        <activity
+            android:name=".BankTransactionActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NovelSerise" />
+
+        <activity
+            android:name=".NovelImageEditorActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NovelSerise" />
+
+        <activity
+            android:name=".ui.handlePayload.HandlePayloadActivity"
+            android:configChanges="locale|screenSize|screenLayout|orientation|keyboardHidden|keyboard|smallestScreenSize"
+            android:exported="false" />
+
+        <activity
+            android:name=".ui.deepLink.DeepLinkHandlerActivity"
+            android:configChanges="locale|screenSize|screenLayout|orientation|keyboardHidden|keyboard|smallestScreenSize"
+            android:exported="true"
+            android:launchMode="singleTask">
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+                <data android:host="app.novelseries.in" />
+                <data android:pathPrefix="/novel" />
+                <data android:pathPrefix="/chapter" />
+                <data android:pathPrefix="/audio" />
+                <data android:pathPrefix="/profile" />
+                <data android:pathPrefix="/post" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name="com.engine.core.service.AudioPlayerService"
+            android:exported="true"
+            android:foregroundServiceType="mediaPlayback">
+            <intent-filter>
+                <action android:name="androidx.media3.session.MediaSessionService" />
+            </intent-filter>
+        </service>
+
+        <service
+            android:name="androidx.work.impl.foreground.SystemForegroundService"
+            android:foregroundServiceType="dataSync" />
+
+        <service
+            android:name=".notificationmanager.MyFirebaseMessagingService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+    </application>
+
+</manifest>

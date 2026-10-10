@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="colorPrimary" format="color" />
+    <attr name="colorOnPrimary" format="color" />
+    <attr name="novel_app_gold_accent" format="color" />
+    <attr name="novel_app_shimmer_color" format="color" />
+
+    <!-- Material 3 compatibility attributes -->
+    <attr name="colorSurfaceVariant" format="color" />
+    <attr name="colorOnSurfaceVariant" format="color" />
+    <attr name="colorOutline" format="color" />
+    <attr name="colorOutlineVariant" format="color" />
+    <attr name="colorPrimaryContainer" format="color" />
+    <attr name="colorOnPrimaryContainer" format="color" />
+
+    <!-- Theme switch and text attributes -->
+    <attr name="track_color_activated" format="color" />
+    <attr name="track_color_normal" format="color" />
+    <attr name="textColorPrimary" format="color" />
+
+    <!-- Edge-to-edge and system bar attributes -->
+    <attr name="appStatusBarColor" format="color" />
+    <attr name="appNavigationBarColor" format="color" />
+    <attr name="appWindowBackground" format="color" />
+
+    <!-- CoverImageView: outline-clipped rounded image, optionally sized by an aspect ratio. -->
+    <declare-styleable name="CoverImageView">
+        <attr name="coverCornerRadius" format="dimension" />
+        <!-- Height as a fraction of width (e.g. 0.5625 for 16:9); 0 = size from layout params. -->
+        <attr name="coverHeightRatio" format="float" />
+    </declare-styleable>
+</resources>

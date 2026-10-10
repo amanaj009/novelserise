@@ -1,0 +1,12 @@
+/build
+/app/build
+*.iml
+.gradle
+.idea
+local.properties
+*.hprof
+
+# Packaged release artifacts are generated, not source.
+*.apk
+*.aab
+*.apks

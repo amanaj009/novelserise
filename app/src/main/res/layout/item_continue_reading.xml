@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Continue listening/reading: cover, titles, progress through the chapter and a play button. -->
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="4dp"
+    app:cardBackgroundColor="?attr/colorSurfaceVariant"
+    app:cardCornerRadius="14dp"
+    app:cardElevation="0dp"
+    app:strokeWidth="0dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="12dp">
+
+        <com.writer_hub.novelserise.ui.custom.CoverImageView
+            android:id="@+id/ivCover"
+            android:layout_width="64dp"
+            android:layout_height="96dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="8dp"
+            android:letterSpacing="0.08"
+            android:text="Continue Listening"
+            android:textAllCaps="true"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@id/btnContinue"
+            app:layout_constraintStart_toEndOf="@id/ivCover"
+            app:layout_constraintTop_toTopOf="@id/ivCover" />
+
+        <TextView
+            android:id="@+id/tvNovelTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@id/tvLabel"
+            app:layout_constraintStart_toStartOf="@id/tvLabel"
+            app:layout_constraintTop_toBottomOf="@id/tvLabel"
+            tools:text="Novel Title" />
+
+        <TextView
+            android:id="@+id/tvChapterTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textSize="13sp"
+            app:layout_constraintEnd_toEndOf="@id/tvLabel"
+            app:layout_constraintStart_toStartOf="@id/tvLabel"
+            app:layout_constraintTop_toBottomOf="@id/tvNovelTitle"
+            tools:text="Chapter 1: The Beginning" />
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/progressChapter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
+            android:max="100"
+            app:indicatorColor="?attr/colorPrimary"
+            app:layout_constraintBottom_toTopOf="@id/tvProgress"
+            app:layout_constraintEnd_toEndOf="@id/tvLabel"
+            app:layout_constraintStart_toStartOf="@id/tvLabel"
+            app:trackColor="@color/player_track"
+            app:trackCornerRadius="2dp"
+            app:trackThickness="4dp"
+            tools:progress="45" />
+
+        <TextView
+            android:id="@+id/tvProgress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFeatureSettings="tnum"
+            android:maxLines="1"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="@id/ivCover"
+            app:layout_constraintEnd_toEndOf="@id/tvLabel"
+            app:layout_constraintStart_toStartOf="@id/tvLabel"
+            tools:text="Chapter 12 • 45% listened" />
+
+        <ImageView
+            android:id="@+id/btnContinue"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/bg_player_play_button"
+            android:contentDescription="Resume"
+            android:padding="13dp"
+            android:src="@drawable/ic_player_play"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="?attr/colorSurface" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

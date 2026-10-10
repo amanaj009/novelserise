@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2026 Aman AJ. All rights reserved.
+  ~
+  -->
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Shimmer placeholder for the Chapter Title -->
+    <View
+        android:id="@+id/shimmerChapterTitle"
+        android:layout_width="120dp"
+        android:layout_height="16dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/rectangular_shimmer_background" />
+
+    <!-- Shimmer placeholder for the Chapter Summary -->
+    <View
+        android:id="@+id/shimmerChapterSummary"
+        android:layout_width="match_parent"
+        android:layout_height="12dp"
+        android:layout_marginBottom="4dp"
+        android:background="@drawable/rectangular_shimmer_background" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="12dp"
+        android:background="@drawable/rectangular_shimmer_background" />
+
+</LinearLayout>

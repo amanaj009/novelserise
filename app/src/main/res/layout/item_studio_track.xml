@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2026 Aman AJ. All rights reserved.
+  -->
+
+<!-- Timeline clip: waveform behind name + duration, lock toggle. Width/offset are set in code. -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardTrack"
+    android:layout_width="wrap_content"
+    android:layout_height="80dp"
+    android:background="@drawable/bg_studio_clip"
+    android:clickable="true"
+    android:clipToOutline="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground">
+
+    <com.writer_hub.novelserise.ui.custom.WaveformView
+        android:id="@+id/waveform"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="6dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginBottom="20dp" />
+
+    <TextView
+        android:id="@+id/tvTrackName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="34dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:shadowColor="#66000000"
+        android:shadowRadius="4"
+        android:text="Track Name"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        tools:text="narration_final.mp3" />
+
+    <TextView
+        android:id="@+id/tvTrackDuration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="5dp"
+        android:text="00:00"
+        android:textColor="#E6FFFFFF"
+        android:textSize="11sp"
+        android:textStyle="bold"
+        tools:text="02:31" />
+
+    <ImageView
+        android:id="@+id/ivLock"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_gravity="top|end"
+        android:layout_margin="3dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:contentDescription="Lock clip position"
+        android:focusable="true"
+        android:padding="6dp"
+        android:src="@drawable/ic_lock"
+        app:tint="@android:color/white" />
+
+</FrameLayout>

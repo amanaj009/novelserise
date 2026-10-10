@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2026 Aman AJ. All rights reserved.
+  -->
+
+<!-- Diamond pack tile (3 per row). Offer packs get a pink border + "HOT" tag in DiamondPackAdapter. -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clipToPadding="false"
+    android:paddingHorizontal="5dp"
+    android:paddingTop="8dp"
+    android:paddingBottom="2dp">
+
+    <LinearLayout
+        android:id="@+id/cardRoot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_shop_pack"
+        android:foreground="?attr/selectableItemBackground"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingHorizontal="8dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="10dp">
+
+        <FrameLayout
+            android:layout_width="64dp"
+            android:layout_height="48dp">
+
+            <View
+                android:layout_width="64dp"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_shop_pack_glow" />
+
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_gravity="center"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_diamonds_income" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/tvDiamondCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:includeFontPadding="false"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            tools:text="100" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="Diamonds"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/tvBonus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/bg_shop_discount"
+            android:paddingHorizontal="6dp"
+            android:paddingVertical="1dp"
+            android:textColor="#FF4F8B"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            tools:text="+20 bonus" />
+
+        <TextView
+            android:id="@+id/btnBuy"
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_shop_price_pill"
+            android:gravity="center"
+            android:maxLines="1"
+            android:textColor="@android:color/white"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            tools:text="₹40" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvHot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginTop="-7dp"
+        android:background="@drawable/bg_shop_hot_tag"
+        android:letterSpacing="0.08"
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="2dp"
+        android:text="HOT DEAL"
+        android:textColor="@android:color/white"
+        android:textSize="9sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        tools:visibility="visible" />
+</FrameLayout>

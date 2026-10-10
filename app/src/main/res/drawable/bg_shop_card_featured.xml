@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2026 Aman AJ. All rights reserved.
+  -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Gold gradient ring -->
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="18dp" />
+            <gradient android:angle="315" android:startColor="#FFE7A3" android:centerColor="#E0A43A" android:endColor="#8C5E14" />
+        </shape>
+    </item>
+    <item android:bottom="1.5dp" android:left="1.5dp" android:right="1.5dp" android:top="1.5dp">
+        <shape android:shape="rectangle">
+            <corners android:radius="16.5dp" />
+            <solid android:color="@color/shop_featured_fill" />
+        </shape>
+    </item>
+</layer-list>

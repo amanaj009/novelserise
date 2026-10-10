@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2026 Aman AJ. All rights reserved.
+  -->
+<!-- Empty-state art: gift on a rounded gradient tile. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="24dp" />
+            <gradient android:angle="315" android:startColor="#F59E0B" android:endColor="#E11D74" />
+        </shape>
+    </item>
+    <item android:width="40dp" android:height="40dp" android:gravity="center" android:drawable="@drawable/ic_gift" />
+</layer-list>

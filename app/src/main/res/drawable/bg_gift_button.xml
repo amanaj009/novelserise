@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Outlined "Send Gift" button (was a MaterialCardView with a gold stroke). -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <corners android:radius="10dp" />
+    <stroke android:width="1.5dp" android:color="?attr/novel_app_gold_accent" />
+</shape>

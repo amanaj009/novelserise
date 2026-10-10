@@ -1,0 +1,3 @@
+[submodule "storymania"]
+	path = storymania
+	url = https://github.com/amanaj009/storymania.git

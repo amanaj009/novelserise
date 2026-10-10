@@ -1,0 +1,15 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.app.novelfm",
+      "sha256_cert_fingerprints": [
+        "D3:8B:FE:20:34:84:85:8E:D3:D7:8D:6A:67:7F:B5:09:EF:38:88:74:DA:F9:06:36:3D:53:BC:5E:F4:7D:D0:49",
+        "D5:A7:81:68:74:0B:98:F9:CB:B3:DB:D0:50:3A:33:E9:03:4E:62:E6:99:61:A6:01:1D:A0:18:1E:3F:3A:52:BC"
+      ]
+    }
+  }
+]

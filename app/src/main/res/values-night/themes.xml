@@ -1,0 +1,72 @@
+<!--
+  ~ Copyright (c) 2026 Aman AJ. All rights reserved.
+  ~
+  -->
+
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme for Dark Mode. Using color references to avoid inflation errors. -->
+    <style name="Theme.NovelSerise" parent="Theme.MaterialComponents.NoActionBar">
+
+
+        <item name="colorPrimary">@color/pink_700</item>
+        <item name="colorPrimaryVariant">@color/pink_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <item name="colorSecondary">@color/pink_200</item>
+        <item name="colorSecondaryVariant">@color/pink_700</item>
+        <item name="colorOnSecondary">@color/navy_800</item>
+
+
+        <item name="colorSurface">@color/black</item>
+        <item name="colorOnSurface">@color/off_white</item>
+        <item name="colorSurfaceVariant">@color/navy_900</item>
+        <item name="colorOnSurfaceVariant">@color/gray_300</item>
+        <item name="colorOutline">@color/navy_800</item>
+        <item name="colorOutlineVariant">@color/navy_800</item>
+
+        <item name="android:textColorPrimary">@color/off_white</item>
+        <item name="android:textColorSecondary">@color/gray_300</item>
+        <item name="android:textColorHint">@color/gray_500</item>
+
+        <item name="textColorPrimary">@color/off_white</item>
+        <item name="track_color_activated">@color/pink_500</item>
+        <item name="track_color_normal">@color/navy_700</item>
+
+        <item name="colorPrimaryContainer">@color/pink_dark_container</item>
+        <item name="colorOnPrimaryContainer">@color/pink_200</item>
+
+        <!-- Custom attributes -->
+        <item name="novel_app_gold_accent">@color/novel_app_gold_accent</item>
+
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/navy_800</item>
+        <item name="android:windowLightStatusBar">false</item>
+
+        <!-- Bottom Navigation Bar (System) -->
+        <item name="android:navigationBarColor">@color/navy_800</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o_mr1">false</item>
+
+        <!-- Edge-to-edge colors for EdgeToEdgeHelper -->
+        <item name="appStatusBarColor">@color/black</item>
+        <item name="appNavigationBarColor">@color/black</item>
+        <item name="appWindowBackground">@color/black</item>
+
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/splash_video_background</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_blank_icon</item>
+        <item name="windowSplashScreenIconBackgroundColor">@color/splash_video_background</item>
+        <item name="postSplashScreenTheme">@style/Theme.NovelSerise</item>
+    </style>
+
+    <style name="BottomSheetDialogTheme" parent="Theme.Design.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheetStyle</item>
+    </style>
+
+    <style name="BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+</resources>

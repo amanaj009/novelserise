@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (c) 2026 Aman AJ. All rights reserved.
+  ~
+  -->
+
+<resources>
+    <array name="initial_range_values">
+        <item>0.0</item>
+        <item>100.0</item>
+    </array>
+</resources>
