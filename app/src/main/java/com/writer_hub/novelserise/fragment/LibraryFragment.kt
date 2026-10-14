@@ -110,10 +110,10 @@ class LibraryFragment : Fragment() {
                         toggleLoading(false)
                         isLoading = false
                         isLastPage = true
-                        if (offset == 0) {
-                            binding.rvLibrary.visibility = View.GONE
-                            binding.layoutEmpty.root.visibility = View.VISIBLE
-                        }
+                        offset = 0
+                        libraryAdapter.submitList(emptyList())
+                        binding.rvLibrary.visibility = View.GONE
+                        binding.layoutEmpty.root.visibility = View.VISIBLE
                     }
 
                     is LibraryUiState.Error -> {
