@@ -117,7 +117,7 @@
                             android:layout_width="32dp"
                             android:layout_height="32dp"
                             android:importantForAccessibility="no"
-                            android:src="@drawable/ic_diamonds_income" />
+                            android:src="@drawable/ic_income" />
 
                         <TextView
                             android:id="@+id/tvTotalEarnings"
@@ -125,7 +125,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
                             android:includeFontPadding="false"
-                            android:text="0"
+                            android:text="₹0.00"
                             android:textColor="@android:color/white"
                             android:textSize="38sp"
                             android:textStyle="bold" />
@@ -136,7 +136,7 @@
                             android:layout_gravity="bottom"
                             android:layout_marginStart="6dp"
                             android:layout_marginBottom="5dp"
-                            android:text="Diamonds earned"
+                            android:text="Earnings balance"
                             android:textColor="#CCFFFFFF"
                             android:textSize="14sp" />
                     </LinearLayout>

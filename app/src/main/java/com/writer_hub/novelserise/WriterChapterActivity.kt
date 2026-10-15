@@ -518,8 +518,8 @@ class WriterChapterActivity : BaseActivity() {
         dialogView.findViewById<TextView>(R.id.tvWritingPoints).text = stats.writingPoint?.toString() ?: "0"
         
         // Earnings
-        dialogView.findViewById<TextView>(R.id.tvCoinsEarning).text = String.format("%.2f", stats.coinsEarning ?: 0.0)
-        dialogView.findViewById<TextView>(R.id.tvAdsEarning).text = String.format("%.2f", stats.adsViewEarning ?: 0.0)
+        dialogView.findViewById<TextView>(R.id.tvCoinsEarning).text = String.format("₹%.2f", stats.coinsEarning ?: 0.0)
+        dialogView.findViewById<TextView>(R.id.tvAdsEarning).text = String.format("₹%.2f", stats.adsViewEarning ?: 0.0)
         
         // Graph status
         val graphStatusTv = dialogView.findViewById<TextView>(R.id.tvGraphStatus)

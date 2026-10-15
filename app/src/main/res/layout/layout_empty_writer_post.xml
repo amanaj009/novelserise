@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
         android:gravity="center"
-        android:text="Write your first story and start earning diamonds from readers."
+        android:text="Write your first story and start earning from readers."
         android:textColor="?attr/colorOnSurfaceVariant"
         android:textSize="13sp" />
 

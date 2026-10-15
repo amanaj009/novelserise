@@ -376,7 +376,7 @@
                         android:layout_height="56dp"
                         android:alpha="0.9"
                         android:importantForAccessibility="no"
-                        android:src="@drawable/ic_diamonds_income" />
+                        android:src="@drawable/ic_income" />
                 </LinearLayout>
 
                 <LinearLayout

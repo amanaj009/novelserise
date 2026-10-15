@@ -187,7 +187,7 @@
                         android:id="@+id/tvCoinsEarning"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        tools:text="$120.0"
+                        tools:text="₹120.00"
                         android:textAppearance="?attr/textAppearanceBody1"
                         android:textColor="?attr/colorOnSurface"
                         android:textStyle="bold" />
@@ -212,7 +212,7 @@
                         android:id="@+id/tvAdsEarning"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        tools:text="$50.0"
+                        tools:text="₹50.00"
                         android:textAppearance="?attr/textAppearanceBody1"
                         android:textColor="?attr/colorOnSurface"
                         android:textStyle="bold" />

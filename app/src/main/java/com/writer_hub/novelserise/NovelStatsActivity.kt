@@ -82,7 +82,7 @@ class NovelStatsActivity : BaseActivity() {
         binding.tvTotalComments.text = stats.comments?.toString() ?: "0"
         binding.tvRating.text = stats.ratings?.toString() ?: "0.0"
         binding.tvWritingPoints.text = stats.writingPoint?.toString() ?: "0"
-        binding.tvCoinsEarning.text = String.format("%.2f", stats.coinsEarning ?: 0.0)
-        binding.tvAdsEarning.text = String.format("%.2f", stats.adsViewEarning ?: 0.0)
+        binding.tvCoinsEarning.text = String.format("₹%.2f", stats.coinsEarning ?: 0.0)
+        binding.tvAdsEarning.text = String.format("₹%.2f", stats.adsViewEarning ?: 0.0)
     }
 }

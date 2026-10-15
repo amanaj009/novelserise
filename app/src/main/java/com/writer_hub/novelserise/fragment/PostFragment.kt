@@ -69,12 +69,8 @@ class PostFragment : Fragment() {
         GlobalAppData.userDetailsLiveData.observe(viewLifecycleOwner) { userDetails ->
             _binding?.let { binding ->
                 val income = userDetails?.userData?.diamondIncome ?: 0.0
-                // Format to show as integer if it's a whole number, else show 2 decimal places
-                binding.tvTotalEarnings.text = if (income % 1 == 0.0) {
-                    income.toInt().toString()
-                } else {
-                    String.format(Locale.getDefault(), "%.2f", income)
-                }
+                binding.tvTotalEarnings.text =
+                    String.format(Locale.getDefault(), "₹%.2f", income)
             }
         }
         
