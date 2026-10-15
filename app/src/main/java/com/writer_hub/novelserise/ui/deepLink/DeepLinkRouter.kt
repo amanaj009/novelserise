@@ -125,4 +125,14 @@ object DeepLinkRouter {
     fun openOrDashboard(activity: Activity, uri: Uri) {
         if (!open(activity, uri)) activity.startActivity(Intent(activity, DashboardActivity::class.java))
     }
+
+    /**
+     * Opens a deep-link destination with Dashboard underneath it. Splash uses this when it is
+     * rebuilding the task for a cold start or an app-mode switch, so Back from shared content
+     * returns to the app instead of closing it.
+     */
+    fun openWithDashboardBackStack(activity: Activity, uri: Uri) {
+        activity.startActivity(Intent(activity, DashboardActivity::class.java))
+        open(activity, uri)
+    }
 }

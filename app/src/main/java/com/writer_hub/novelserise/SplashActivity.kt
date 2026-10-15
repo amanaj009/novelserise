@@ -262,7 +262,7 @@ class SplashActivity : AppCompatActivity() {
         // An audio-episode link must open in audio mode (and a chapter link in novel mode),
         // whatever mode the app was last in.
         DeepLinkRouter.applyMode(uri, splashViewModel)
-        DeepLinkRouter.openOrDashboard(this, uri)
+        DeepLinkRouter.openWithDashboardBackStack(this, uri)
         isReady = true
         finish()
     }
