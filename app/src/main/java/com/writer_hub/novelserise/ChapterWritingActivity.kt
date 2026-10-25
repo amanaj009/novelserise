@@ -14,6 +14,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import androidx.work.workDataOf
 import com.engine.core.helper.decodeHtmlToTextV2
@@ -368,11 +369,48 @@ class ChapterWritingActivity : BaseActivity() {
             ))
             .build()
 
-        WorkManager.getInstance(this).enqueue(workRequest)
-        
-        Toast.makeText(this, "Publishing in background...", Toast.LENGTH_SHORT).show()
-        isModified = false
-        finish()
+        val workManager = WorkManager.getInstance(this)
+        val publishWork = workManager.getWorkInfoByIdLiveData(workRequest.id)
+        workManager.enqueue(workRequest)
+
+        setLoading(true)
+        binding.btnPublish.text = "Publishing..."
+        binding.tvAutoSaveStatus.text = "Publishing chapter..."
+        Toast.makeText(this, "Publishing chapter...", Toast.LENGTH_SHORT).show()
+
+        // Keep the editor open while the background upload runs. Closing it here
+        // made a successful publish look like the app had navigated away on error.
+        publishWork.observe(this) { workInfo ->
+            when (workInfo?.state) {
+                WorkInfo.State.SUCCEEDED -> {
+                    setLoading(false)
+                    chapter = chapter?.copy(
+                        chapterName = title,
+                        content = content,
+                        wordsCount = wordCount,
+                        status = "published"
+                    )
+                    GlobalAppData.selectedChapter.postValue(chapter)
+                    binding.btnPublish.text = "Update"
+                    binding.tvAutoSaveStatus.text = "Published"
+                    isModified = false
+                    Toast.makeText(this, "Chapter published successfully", Toast.LENGTH_SHORT).show()
+                    publishWork.removeObservers(this)
+                }
+                WorkInfo.State.FAILED, WorkInfo.State.CANCELLED -> {
+                    setLoading(false)
+                    binding.btnPublish.text = if (chapter?.status == "published") "Update" else "Publish"
+                    binding.tvAutoSaveStatus.text = "Publishing failed"
+                    Toast.makeText(this, "Chapter publish failed. Please try again.", Toast.LENGTH_LONG).show()
+                    publishWork.removeObservers(this)
+                }
+                WorkInfo.State.ENQUEUED, WorkInfo.State.RUNNING, WorkInfo.State.BLOCKED -> {
+                    setLoading(true)
+                    binding.btnPublish.text = "Publishing..."
+                }
+                else -> Unit
+            }
+        }
     }
 
     private fun setLoading(isLoading: Boolean) {
