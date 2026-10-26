@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Launch video, centred on black (the video's own background) so any letterbox blends in. -->
+<!-- Launch intro on black (the system splash background), so the hand-off has no flash. -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/splash_video_background">
 
-    <VideoView
+    <!-- Code-drawn intro (default). -->
+    <com.writer_hub.novelserise.view.SplashAnimationView
+        android:id="@+id/splashAnimation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- Launch video, used only when SplashActivity.USE_LAUNCH_VIDEO is on. -->
+    <SurfaceView
         android:id="@+id/videoSplash"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:visibility="gone" />
 
 </FrameLayout>

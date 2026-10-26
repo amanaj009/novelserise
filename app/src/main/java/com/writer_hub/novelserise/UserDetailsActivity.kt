@@ -462,6 +462,13 @@ class UserDetailsActivity : BaseActivity() {
             androidx.appcompat.R.attr.colorPrimary
         }
         binding.btnFollow.backgroundTintList = ColorStateList.valueOf(getThemeColor(colorAttr))
+        val textColorAttr = if (isFollowing) {
+            com.google.android.material.R.attr.colorSurface
+        } else {
+            com.google.android.material.R.attr.colorOnPrimary
+        }
+        binding.btnFollow.setTextColor(getThemeColor(textColorAttr))
+        binding.btnFollow.strokeWidth = 0
     }
 
     private fun getThemeColor(attr: Int): Int {

@@ -62,11 +62,11 @@ class MyApplication : Application() {
         // Increment app launch count
         RateAppManager.incrementLaunchCount(this)
 
-        // Initialize Mobile Ads SDK
-        MobileAds.initialize(this) {}
-
         // Initialize Notification System & Ensure FCM Topic Subscription
         appScope.launch(Dispatchers.IO) {
+            // Off the main thread: it is slow and would delay the launch video.
+            MobileAds.initialize(this@MyApplication) {}
+
             try {
                 SMNotificationHelper.init(
                     HandlePayloadActivity::class.java,

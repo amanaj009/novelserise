@@ -426,6 +426,23 @@ class ReadChapterActivity : BaseActivity() {
         })
 
         // Background Colors
+        val swatchOutline = android.util.TypedValue().also {
+            dialogBinding.root.context.theme.resolveAttribute(
+                com.google.android.material.R.attr.colorOnSurface, it, true
+            )
+        }.data
+        val swatchStrokeWidth = resources.displayMetrics.density.toInt().coerceAtLeast(1)
+        listOf(
+            dialogBinding.viewColorWhite to Color.WHITE,
+            dialogBinding.viewColorSepia to Color.parseColor("#F4ECD8"),
+            dialogBinding.viewColorGrey to Color.parseColor("#333333"),
+            dialogBinding.viewColorBlack to Color.BLACK
+        ).forEach { (swatch, color) ->
+            swatch.background = android.graphics.drawable.GradientDrawable().apply {
+                setColor(color)
+                setStroke(swatchStrokeWidth, swatchOutline)
+            }
+        }
         dialogBinding.viewColorWhite.setOnClickListener { updateTheme("#FFFFFF", "#000000", "LIGHT"); dialog.dismiss() }
         dialogBinding.viewColorSepia.setOnClickListener { updateTheme("#F4ECD8", "#5B4636", "SEPIA"); dialog.dismiss() }
         dialogBinding.viewColorGrey.setOnClickListener { updateTheme("#333333", "#E0E0E0", "GREY"); dialog.dismiss() }

@@ -122,8 +122,12 @@ object DeepLinkRouter {
         return true
     }
 
-    fun openOrDashboard(activity: Activity, uri: Uri) {
-        if (!open(activity, uri)) activity.startActivity(Intent(activity, DashboardActivity::class.java))
+    /** Opens a link after Splash, keeping Home beneath the content for Back navigation. */
+    fun openWithDashboard(activity: Activity, uri: Uri) {
+        // Splash finishes after routing. Without Dashboard beneath the destination, closing a
+        // shared episode/reading chapter would finish the last activity and exit the app.
+        activity.startActivity(Intent(activity, DashboardActivity::class.java))
+        open(activity, uri)
     }
 
     /**

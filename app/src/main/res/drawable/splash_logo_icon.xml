@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- System launch splash icon. Same mark, size and centre as the first frame of
+     SplashAnimationView, so the hand-off from the system splash is seamless. Kept inside the
+     192dp safe circle of the Android 12+ splash icon. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:width="@dimen/splash_logo_size"
+        android:height="@dimen/splash_logo_size"
+        android:gravity="center">
+        <bitmap
+            android:gravity="fill"
+            android:src="@drawable/splash_logo_mark" />
+    </item>
+</layer-list>
