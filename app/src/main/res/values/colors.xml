@@ -84,4 +84,31 @@
     <color name="option_card_fill">#F6F7F9</color>
     <color name="option_card_stroke">#E4E7EC</color>
     <color name="option_icon_fill">#ECEEF2</color>
+
+    <!-- Writer redesign (v2): warm cream surfaces, pink accent -->
+    <color name="v2_bg">#FAF6F3</color>
+    <color name="v2_card">#FFFFFF</color>
+    <color name="v2_card_stroke">#ECE4E0</color>
+    <color name="v2_border">#E4DAD6</color>
+    <color name="v2_border_strong">#DCD0D4</color>
+    <color name="v2_divider">#F1EAE6</color>
+    <color name="v2_track">#EFE8E4</color>
+    <color name="v2_text">#1B1418</color>
+    <color name="v2_text_muted">#6F6670</color>
+    <color name="v2_hint">#6F6670</color>
+    <color name="v2_accent">#D91E5B</color>
+    <color name="v2_accent_soft">#1FD91E5B</color>
+    <color name="v2_accent_text">#D91E5B</color>
+    <color name="v2_on_accent">#FFFFFF</color>
+    <color name="v2_pill_dark">#1B1418</color>
+    <color name="v2_on_pill_dark">#FFFFFF</color>
+    <color name="v2_green">#12A15F</color>
+    <color name="v2_green_text">#0B7A46</color>
+    <color name="v2_green_soft">#DDF5E8</color>
+    <color name="v2_amber_text">#8A5A00</color>
+    <color name="v2_amber_soft">#FFF0D6</color>
+    <color name="v2_blue_text">#1A4FB0</color>
+    <color name="v2_blue_soft">#E5EFFE</color>
+    <color name="v2_red_text">#B3122F</color>
+    <color name="v2_switch_off">#CFC4C8</color>
 </resources>

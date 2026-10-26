@@ -9,9 +9,9 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import android.util.Log
 import android.view.View
-import android.graphics.Color
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.widget.NestedScrollView
@@ -190,15 +190,16 @@ class WriterChapterActivity : BaseActivity() {
     }
 
     private fun renderFilterChips() {
-        val onSurface = binding.tvNovelTitle.currentTextColor
+        val muted = ContextCompat.getColor(this, R.color.v2_text_muted)
+        val onPill = ContextCompat.getColor(this, R.color.v2_on_pill_dark)
         listOf(
             binding.chipAll to "all",
             binding.chipPublished to "published",
             binding.chipDrafts to "unpublished"
         ).forEach { (chip, status) ->
             val selected = status == currentStatus
-            chip.setBackgroundResource(if (selected) R.drawable.bg_filter_chip_selected else R.drawable.bg_filter_chip)
-            chip.setTextColor(if (selected) Color.WHITE else onSurface)
+            chip.setBackgroundResource(if (selected) R.drawable.v2_seg_selected else 0)
+            chip.setTextColor(if (selected) onPill else muted)
         }
         binding.tvSortLabel.text = if (currentOrder == "ASC") "Oldest first" else "Newest first"
     }

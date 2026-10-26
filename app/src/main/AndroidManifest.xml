@@ -179,7 +179,7 @@
         <activity
             android:name=".WriterChapterActivity"
             android:exported="false"
-            android:theme="@style/Theme.NovelSerise" />
+            android:theme="@style/Theme.NovelSerise.V2" />
 
         <activity
             android:name=".WriterAudioUploadActivity"
@@ -190,7 +190,7 @@
         <activity
             android:name=".ChapterWritingActivity"
             android:exported="false"
-            android:theme="@style/Theme.NovelSerise"
+            android:theme="@style/Theme.NovelSerise.V2"
             android:windowSoftInputMode="adjustResize" />
 
         <activity
@@ -202,7 +202,7 @@
         <activity
             android:name=".CreateNovelActivity"
             android:exported="false"
-            android:theme="@style/Theme.NovelSerise"
+            android:theme="@style/Theme.NovelSerise.V2"
             android:windowSoftInputMode="adjustResize" />
 
         <activity

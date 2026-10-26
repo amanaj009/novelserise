@@ -8,6 +8,8 @@ package com.writer_hub.novelserise
 import android.content.res.ColorStateList
 import android.net.Uri
 import android.os.Bundle
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.activity.OnBackPressedCallback
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -44,6 +46,10 @@ class CreateNovelActivity : BaseActivity() {
     
     private var selectedCategory: String? = null
     private var selectedSubcategory: String? = null
+    private var selectedCategoryName: String? = null
+    private var selectedSubcategoryName: String? = null
+
+    private var currentStep = 1
     
     private var isEditMode: Boolean = false
     private var existingNovel: Novel? = null
@@ -76,6 +82,11 @@ class CreateNovelActivity : BaseActivity() {
         setupStatusSelector()
         setupListeners()
         fetchCategories()
+        showStep(1)
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() = goBack()
+        })
         
         if (isEditMode) {
             populateData(existingNovel!!)
@@ -83,9 +94,7 @@ class CreateNovelActivity : BaseActivity() {
     }
 
     private fun setupUI() {
-        binding.headerView.tvTitle.text = if (isEditMode) "Edit Novel" else "Create Novel"
-        binding.headerView.btnBack.setOnClickListener { finish() }
-        binding.saveButton.text = if (isEditMode) "Update Story" else "Create Story"
+        binding.btnBack.setOnClickListener { goBack() }
         
         // Hide policies in Edit Mode
         binding.layoutPolicies.visibility = if (isEditMode) View.GONE else View.VISIBLE
@@ -115,11 +124,83 @@ class CreateNovelActivity : BaseActivity() {
         }
 
         binding.saveButton.setOnClickListener {
-            handleSave()
+            if (currentStep < TOTAL_STEPS) goNext() else handleSave()
         }
 
         listenToTitleInput()
         setupDescriptionTextWatcher()
+    }
+
+    private fun goBack() {
+        if (currentStep > 1) showStep(currentStep - 1) else finish()
+    }
+
+    private fun goNext() {
+        if (!validateStep(currentStep)) return
+        showStep(currentStep + 1)
+    }
+
+    private fun validateStep(step: Int): Boolean {
+        when (step) {
+            1 -> {
+                val title = binding.titleEditText.text.toString().trim()
+                val idea = binding.ideaEditText.text.toString().trim()
+                if (isMatchingTitle) {
+                    Toast.makeText(this, "Please use a unique novel name.", Toast.LENGTH_SHORT).show()
+                    return false
+                }
+                if (title.isEmpty() || idea.isEmpty()) {
+                    Toast.makeText(this, "Please add a title and a story idea", Toast.LENGTH_SHORT).show()
+                    return false
+                }
+            }
+            2 -> if (selectedCategory == null) {
+                Toast.makeText(this, "Please pick a genre", Toast.LENGTH_SHORT).show()
+                return false
+            }
+            3 -> if (!isEditMode && smallCoverUri == null) {
+                Toast.makeText(this, "Please select a cover image", Toast.LENGTH_SHORT).show()
+                return false
+            }
+        }
+        return true
+    }
+
+    private fun showStep(step: Int) {
+        currentStep = step
+        binding.step1.visibility = if (step == 1) View.VISIBLE else View.GONE
+        binding.step2.visibility = if (step == 2) View.VISIBLE else View.GONE
+        binding.step3.visibility = if (step == 3) View.VISIBLE else View.GONE
+        binding.step4.visibility = if (step == 4) View.VISIBLE else View.GONE
+
+        listOf(binding.seg1, binding.seg2, binding.seg3, binding.seg4).forEachIndexed { index, seg ->
+            seg.setBackgroundResource(if (index < step) R.drawable.v2_seg_on else R.drawable.v2_seg_off)
+        }
+        binding.tvStepCount.text = "$step / $TOTAL_STEPS"
+
+        binding.saveButton.text = when (step) {
+            1 -> "Next · Genre"
+            2 -> "Next · Covers"
+            3 -> "Next · Review"
+            else -> if (isEditMode) "Update story" else "Create story"
+        }
+
+        if (step == TOTAL_STEPS) bindReview()
+        currentFocus?.clearFocus()
+    }
+
+    private fun bindReview() {
+        binding.tvReviewTitle.text = binding.titleEditText.text.toString().trim()
+        binding.tvReviewMeta.text = listOfNotNull(selectedCategoryName, selectedSubcategoryName).joinToString(" · ")
+        val cover: Any? = smallCoverUri ?: existingNovel?.imageLink
+        if (cover != null) {
+            ImageHelper.loadImage(this, cover, binding.ivReviewCover, R.drawable.shimmer_placeholder)
+        }
+        refreshReviewStatus()
+    }
+
+    private fun refreshReviewStatus() {
+        binding.tvReviewStatus.text = if (binding.btnStatusCompleted.isChecked) "Completed" else "Running"
     }
 
     private fun setupStatusSelector() {
@@ -135,6 +216,7 @@ class CreateNovelActivity : BaseActivity() {
     private fun setCompletedStatus(isCompleted: Boolean) {
         binding.btnStatusRunning.isChecked = !isCompleted
         binding.btnStatusCompleted.isChecked = isCompleted
+        refreshReviewStatus()
     }
 
     private fun loadImage(source: Any?, imageView: ImageView) {
@@ -143,6 +225,7 @@ class CreateNovelActivity : BaseActivity() {
             return
         }
         imageView.imageTintList = null
+        imageView.setPadding(0, 0, 0, 0)
         ImageHelper.loadImage(this, source, imageView, R.drawable.shimmer_placeholder)
     }
 
@@ -158,14 +241,16 @@ class CreateNovelActivity : BaseActivity() {
             }
 
             selectedCategory = categoryToSelect.id
+            selectedCategoryName = categoryToSelect.name
 
             val categoryAdapter = CategoryAdapter(categories) { category ->
                 selectedCategory = category.id
+                selectedCategoryName = category.name
                 setupSubCategoryAdapter(category.subcategories, null)
             }
 
             categoryAdapter.selectCategory(categoryToSelect.id)
-            binding.recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+            binding.recyclerView.layoutManager = GridLayoutManager(this, 2)
             binding.recyclerView.adapter = categoryAdapter
             
             val subCatToSelectId = if (isEditMode) existingNovel?.subCategory else categoryToSelect.subcategories.firstOrNull()?.id
@@ -175,9 +260,14 @@ class CreateNovelActivity : BaseActivity() {
 
     private fun setupSubCategoryAdapter(subcategories: List<WoSubcategory>, preSelectedId: String?) {
         selectedSubcategory = preSelectedId ?: subcategories.firstOrNull()?.id
+        selectedSubcategoryName = subcategories.find { it.id == selectedSubcategory }?.name
 
         val adapter = SubcategoryAdapter(subcategories) { subcategory ->
             selectedSubcategory = subcategory.id
+            selectedSubcategoryName = subcategory.name
+        }
+        if (preSelectedId == null) {
+            selectedSubcategory?.let { adapter.selectSubcategory(it) }
         }
 
         if (preSelectedId != null) {
@@ -186,7 +276,7 @@ class CreateNovelActivity : BaseActivity() {
 
         binding.subcategoryRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.subcategoryRecyclerView.adapter = adapter
-        binding.subcategoryRecyclerView.visibility = if (subcategories.isNotEmpty()) View.VISIBLE else View.GONE
+        binding.layoutSubcategory.visibility = if (subcategories.isNotEmpty()) View.VISIBLE else View.GONE
     }
 
     private fun populateData(novel: Novel) {
@@ -210,7 +300,13 @@ class CreateNovelActivity : BaseActivity() {
                         val exists = viewModel.chknovelname(title, existingNovel?.id)
                         isMatchingTitle = exists
                         binding.warningTextTop.visibility = if (exists) View.VISIBLE else View.GONE
+                        binding.tvTitleAvailable.visibility = if (exists) View.GONE else View.VISIBLE
                     }
+                } else {
+                    debounceJob?.cancel()
+                    isMatchingTitle = false
+                    binding.warningTextTop.visibility = View.GONE
+                    binding.tvTitleAvailable.visibility = View.GONE
                 }
             }
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -222,6 +318,7 @@ class CreateNovelActivity : BaseActivity() {
         binding.ideaEditText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 val wordCount = countWords(s.toString())
+                binding.tvIdeaCount.text = "$wordCount / 500 words"
                 if (wordCount < 10 && wordCount > 0) {
                     binding.warningTextIdea.text = "Description is too short (min 10 words)"
                     binding.warningTextIdea.visibility = View.VISIBLE
@@ -305,6 +402,10 @@ class CreateNovelActivity : BaseActivity() {
                     .show()
             }
         }
+    }
+
+    private companion object {
+        const val TOTAL_STEPS = 4
     }
 
     override fun onDestroy() {

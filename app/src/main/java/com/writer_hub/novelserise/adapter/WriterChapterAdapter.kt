@@ -5,7 +5,7 @@
 
 package com.writer_hub.novelserise.adapter
 
-import android.graphics.Color
+import androidx.core.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -145,8 +145,9 @@ class WriterChapterAdapter(
 
     private fun showStatus(binding: ItemWriterChapterBinding, published: Boolean) {
         binding.tvStatusLabel.text = if (published) "● PUBLISHED" else "● DRAFT"
-        binding.tvStatusLabel.setTextColor(if (published) PUBLISHED_COLOR else DRAFT_COLOR)
-        binding.tvStatusLabel.setBackgroundResource(if (published) R.drawable.bg_status_live else R.drawable.bg_status_draft)
+        val ctx = binding.root.context
+        binding.tvStatusLabel.setTextColor(ContextCompat.getColor(ctx, if (published) R.color.v2_green_text else R.color.v2_text_muted))
+        binding.tvStatusLabel.setBackgroundResource(if (published) R.drawable.v2_status_live else R.drawable.v2_status_draft)
         binding.tvSwitchHint.text = if (published) "Live" else "Publish"
     }
 
@@ -154,11 +155,6 @@ class WriterChapterAdapter(
 
     /** Loaded chapters (for the header counts). */
     val items: List<WoChapter> get() = chapters
-
-    private companion object {
-        val PUBLISHED_COLOR = Color.parseColor("#10B981")
-        val DRAFT_COLOR = Color.parseColor("#F59E0B")
-    }
 
     fun updateData(newChapters: List<WoChapter>) {
         chapters.clear()

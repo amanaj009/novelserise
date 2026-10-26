@@ -6,7 +6,8 @@
 package com.writer_hub.novelserise.adapter
 
 import com.engine.core.models.WoSubcategory
-import android.graphics.Color
+import androidx.core.content.ContextCompat
+import com.writer_hub.novelserise.R
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -32,20 +33,15 @@ class SubcategoryAdapter(
 
         val isSelected = subcategory.id == selectedSubcategoryId
         val context = holder.itemView.context
-        val accentColor = com.engine.core.manager.ThemeManager.getThemeColor(context, "colorAccent")
-        val outlineColor =
-            com.engine.core.manager.ThemeManager.getThemeColor(context, "colorOutline")
-        val onSurfaceColor =
-            com.engine.core.manager.ThemeManager.getThemeColor(context, "colorOnSurface")
 
-        holder.binding.cardCategory.strokeColor = if (isSelected) accentColor else outlineColor
+        holder.binding.cardCategory.strokeColor =
+            ContextCompat.getColor(context, if (isSelected) R.color.v2_pill_dark else R.color.v2_border)
         holder.binding.cardCategory.setCardBackgroundColor(
-            if (isSelected) com.engine.core.manager.ThemeManager.getThemeColor(
-                context,
-                "colorSecondaryPrimaryLite"
-            ) else com.engine.core.manager.ThemeManager.getThemeColor(context, "colorSurface")
+            ContextCompat.getColor(context, if (isSelected) R.color.v2_pill_dark else R.color.v2_card)
         )
-        holder.binding.tvCategoryName.setTextColor(if (isSelected) accentColor else onSurfaceColor)
+        holder.binding.tvCategoryName.setTextColor(
+            ContextCompat.getColor(context, if (isSelected) R.color.v2_on_pill_dark else R.color.v2_text)
+        )
 
         holder.itemView.setOnClickListener {
             selectSubcategory(subcategory.id)

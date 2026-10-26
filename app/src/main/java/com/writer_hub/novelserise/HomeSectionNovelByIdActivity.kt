@@ -34,13 +34,34 @@ class HomeSectionNovelByIdActivity : BaseActivity() {
     private val limit = 21
     private var isLoading = false
     private var hasMore = true
+    private val seenIds = HashSet<String>()
+
+    // Novels the home screen already showed for this section. The home API pads a short section
+    // with filler novels, but the "view all" API only returns real matches, so without this the
+    // list opens with fewer novels than the home card.
+    private var prefill: List<HomepageNovelLite> = emptyList()
 
     companion object {
+        // The server slices `limit` rows first and filters them (language / audio mode / category)
+        // afterwards, so a page can come back with only a few novels even though more follow.
+        // Keep asking for the next raw page until the list is filled.
+        private const val MIN_PAGE_FILL = 12
+        private const val MAX_EMPTY_PAGES = 2
+
         private const val EXTRA_SECTION_ID = "extra_section_id"
         private const val EXTRA_SECTION_KEY = "extra_section_key"
         private const val EXTRA_SECTION_TITLE = "extra_section_title"
 
-        fun start(context: Context, sectionId: Int, title: String, key: String = "") {
+        private var pendingPrefill: List<HomepageNovelLite> = emptyList()
+
+        fun start(
+            context: Context,
+            sectionId: Int,
+            title: String,
+            key: String = "",
+            homeNovels: List<HomepageNovelLite> = emptyList()
+        ) {
+            pendingPrefill = homeNovels
             val intent = Intent(context, HomeSectionNovelByIdActivity::class.java).apply {
                 putExtra(EXTRA_SECTION_ID, sectionId)
                 putExtra(EXTRA_SECTION_TITLE, title)
@@ -55,6 +76,9 @@ class HomeSectionNovelByIdActivity : BaseActivity() {
         binding = ActivityHomeSectionNovelByIdBinding.inflate(layoutInflater)
         setContentView(binding.root)
         applyEdgeToEdge(binding.root)
+
+        prefill = pendingPrefill
+        pendingPrefill = emptyList()
 
         sectionId = intent.getIntExtra(EXTRA_SECTION_ID, 0)
         sectionKey = intent.getStringExtra(EXTRA_SECTION_KEY) ?: ""
@@ -120,6 +144,7 @@ class HomeSectionNovelByIdActivity : BaseActivity() {
         if (refresh) {
             offset = 0
             hasMore = true
+            seenIds.clear()
             binding.shimmerView.visibility = View.VISIBLE
             binding.shimmerView.startShimmer()
             binding.rvNovels.visibility = View.GONE
@@ -131,8 +156,22 @@ class HomeSectionNovelByIdActivity : BaseActivity() {
         lifecycleScope.launch {
             try {
                 val novels = if (sectionId != 0) {
-                    val section = novelViewModel.fetchHomeSectionById(sectionId, limit, offset)
-                    section?.novels ?: emptyList()
+                    val collected = ArrayList<HomepageNovelLite>()
+                    if (refresh) {
+                        collected.addAll(prefill.filter { it.id.isNotBlank() && seenIds.add(it.id) })
+                    }
+                    var emptyPages = 0
+                    while (collected.size < MIN_PAGE_FILL && emptyPages < MAX_EMPTY_PAGES) {
+                        val page = novelViewModel.fetchHomeSectionById(sectionId, limit, offset)
+                            ?.novels.orEmpty()
+                        // `offset` counts raw rows on the server, not the rows left after filtering.
+                        offset += limit
+                        val fresh = page.filter { it.id.isNotBlank() && seenIds.add(it.id) }
+                        if (page.isEmpty()) emptyPages++ else emptyPages = 0
+                        collected.addAll(fresh)
+                    }
+                    hasMore = emptyPages < MAX_EMPTY_PAGES
+                    collected
                 } else {
                     // Fallback to fetching by key/type
                     val fetchedNovels = novelViewModel.fetchNovelsByCategoryAndSubcategory(
@@ -144,6 +183,8 @@ class HomeSectionNovelByIdActivity : BaseActivity() {
                         timeSlot = "0",
                         resourceId = "0"
                     )
+                    offset += fetchedNovels.size
+                    hasMore = fetchedNovels.size >= limit
                     // Convert Novel to HomepageNovelLite
                     fetchedNovels.map { novel ->
                         HomepageNovelLite(
@@ -173,8 +214,6 @@ class HomeSectionNovelByIdActivity : BaseActivity() {
                     novelAdapter.submitList(newList)
                     binding.rvNovels.visibility = View.VISIBLE
                     
-                    offset += novels.size
-                    hasMore = novels.size >= limit
                 } else {
                     hasMore = false
                     if (refresh && novelAdapter.itemCount == 0) {

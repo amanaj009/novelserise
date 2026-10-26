@@ -94,9 +94,16 @@ class ChapterWritingActivity : BaseActivity() {
     }
 
     private fun setupUI() {
-        if (chapter?.status == "published") {
+        val published = chapter?.status == "published"
+        if (published) {
             binding.btnPublish.text = "Update"
         }
+
+        val number = chapter?.sqc?.takeIf { it.isNotBlank() }
+        binding.tvBarTitle.text = if (number != null) "Chapter $number" else "New chapter"
+        val novelTitle = novel?.title?.takeIf { it.isNotBlank() }
+        val state = if (published) "Published" else "Draft"
+        binding.tvBarSubtitle.text = if (novelTitle != null) "$novelTitle · $state" else state
 
         updateScheduleUI()
         updateUndoRedoButtons()
@@ -125,7 +132,7 @@ class ChapterWritingActivity : BaseActivity() {
     }
 
     private fun setupListeners() {
-        binding.toolbar.setNavigationOnClickListener {
+        binding.btnBack.setOnClickListener {
             onBackPressedDispatcher.onBackPressed()
         }
 

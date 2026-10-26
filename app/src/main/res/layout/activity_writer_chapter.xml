@@ -22,31 +22,33 @@
         android:background="?attr/colorSurface"
         app:elevation="0dp">
 
+        <!-- App bar: back, cover, title + stats, stats button -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingStart="4dp"
-            android:paddingTop="10dp"
-            android:paddingEnd="12dp"
-            android:paddingBottom="6dp">
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="4dp">
 
             <ImageView
                 android:id="@+id/btnBack"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/v2_icon_btn"
                 android:contentDescription="Back"
-                android:padding="12dp"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:padding="11dp"
                 android:src="@drawable/ic_back"
                 app:tint="?attr/colorOnSurface" />
 
             <com.writer_hub.novelserise.ui.custom.CoverImageView
                 android:id="@+id/ivNovelCover"
-                android:layout_width="40dp"
-                android:layout_height="60dp"
-                android:layout_marginStart="2dp"
+                android:layout_width="36dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="10dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/shimmer_placeholder"
                 app:coverCornerRadius="8dp" />
@@ -54,7 +56,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginEnd="8dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
@@ -74,7 +76,6 @@
                     android:id="@+id/tvChapterStats"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="2dp"
                     android:ellipsize="end"
                     android:maxLines="1"
                     android:textColor="?attr/colorOnSurfaceVariant"
@@ -86,31 +87,69 @@
                 android:id="@+id/btnStats"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="@drawable/bg_icon_button"
+                android:background="@drawable/v2_icon_btn"
                 android:contentDescription="Novel statistics"
                 android:foreground="?attr/selectableItemBackgroundBorderless">
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
                     android:layout_gravity="center"
                     android:importantForAccessibility="no"
                     android:src="@drawable/ic_studio_stats"
                     app:tint="?attr/colorOnSurface" />
             </FrameLayout>
+        </LinearLayout>
+
+        <!-- Status filter (segmented) + sort -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/v2_seg_track"
+                android:orientation="horizontal"
+                android:padding="2dp">
+
+                <TextView
+                    android:id="@+id/chipAll"
+                    style="@style/V2SegItem"
+                    android:text="All" />
+
+                <TextView
+                    android:id="@+id/chipPublished"
+                    style="@style/V2SegItem"
+                    android:text="Published" />
+
+                <TextView
+                    android:id="@+id/chipDrafts"
+                    style="@style/V2SegItem"
+                    android:text="Drafts" />
+            </LinearLayout>
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
 
             <FrameLayout
                 android:id="@+id/btnFilter"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/bg_icon_button"
+                android:background="@drawable/v2_icon_btn"
                 android:contentDescription="Sort chapters"
                 android:foreground="?attr/selectableItemBackgroundBorderless">
 
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
                     android:layout_gravity="center"
                     android:importantForAccessibility="no"
                     android:src="@drawable/ic_sort"
@@ -118,37 +157,15 @@
             </FrameLayout>
         </LinearLayout>
 
-        <!-- Status filter -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingHorizontal="16dp"
-            android:paddingTop="6dp"
-            android:paddingBottom="10dp">
-
-            <TextView
-                android:id="@+id/chipAll"
-                style="@style/WriterFilterChip"
-                android:text="All" />
-
-            <TextView
-                android:id="@+id/chipPublished"
-                style="@style/WriterFilterChip"
-                android:layout_marginStart="8dp"
-                android:text="Published" />
-
-            <TextView
-                android:id="@+id/chipDrafts"
-                style="@style/WriterFilterChip"
-                android:layout_marginStart="8dp"
-                android:text="Drafts" />
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
+            android:paddingStart="18dp"
+            android:paddingTop="10dp"
+            android:paddingEnd="18dp"
+            android:paddingBottom="6dp">
 
             <TextView
                 android:id="@+id/tvSortLabel"
@@ -156,7 +173,20 @@
                 android:layout_height="wrap_content"
                 android:textColor="?attr/colorOnSurfaceVariant"
                 android:textSize="12sp"
+                android:textStyle="bold"
                 tools:text="Newest first" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Publish switch makes a chapter live"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                android:textSize="12sp" />
         </LinearLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -216,7 +246,7 @@
         android:layout_height="50dp"
         android:layout_gravity="bottom|end"
         android:layout_margin="20dp"
-        android:background="@drawable/bg_studio_fab"
+        android:background="@drawable/v2_btn_accent"
         android:contentDescription="Add New Chapter"
         android:drawablePadding="6dp"
         android:elevation="6dp"

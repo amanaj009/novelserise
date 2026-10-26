@@ -33,11 +33,7 @@ class HomeBannerAdapter(private val novels: List<HomepageNovelLite>) :
     class BannerViewHolder(private val binding: ItemHomeBannerBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(novel: HomepageNovelLite) {
-            val bannerUrl = novel.bannerImage?.takeIf { it.isNotBlank() }
-                ?: novel.middleBannerImage?.takeIf { it.isNotBlank() }
-                ?: novel.imageLinkHome?.takeIf { it.isNotBlank() }
-                ?: novel.imageLinkCover?.takeIf { it.isNotBlank() }
-                ?: novel.imageLink
+            val bannerUrl = novel.imageLinkCover
 
             // Hardware bitmap decoded at the banner's on-screen size (full width, 16:9): the wide
             // banner is drawn from GPU memory on every carousel frame.

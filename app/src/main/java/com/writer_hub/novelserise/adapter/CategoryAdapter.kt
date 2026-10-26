@@ -6,11 +6,13 @@
 package com.writer_hub.novelserise.adapter
 
 import com.engine.core.models.WoCategory
-import android.graphics.Color
+import android.view.View
+import androidx.core.content.ContextCompat
+import com.writer_hub.novelserise.R
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.writer_hub.novelserise.databinding.ItemCategorySelectableBinding
+import com.writer_hub.novelserise.databinding.ItemGenreTileBinding
 
 class CategoryAdapter(
     private var categories: List<WoCategory>,
@@ -19,10 +21,10 @@ class CategoryAdapter(
 
     private var selectedCategoryId: String? = null
 
-    class ViewHolder(val binding: ItemCategorySelectableBinding) : RecyclerView.ViewHolder(binding.root)
+    class ViewHolder(val binding: ItemGenreTileBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemCategorySelectableBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemGenreTileBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
@@ -32,20 +34,14 @@ class CategoryAdapter(
 
         val isSelected = category.id == selectedCategoryId
         val context = holder.itemView.context
-        val accentColor = com.engine.core.manager.ThemeManager.getThemeColor(context, "colorAccent")
-        val outlineColor =
-            com.engine.core.manager.ThemeManager.getThemeColor(context, "colorOutline")
-        val onSurfaceColor =
-            com.engine.core.manager.ThemeManager.getThemeColor(context, "colorOnSurface")
 
-        holder.binding.cardCategory.strokeColor = if (isSelected) accentColor else outlineColor
+        holder.binding.cardCategory.strokeColor =
+            ContextCompat.getColor(context, if (isSelected) R.color.v2_accent else R.color.v2_border)
+        holder.binding.cardCategory.strokeWidth = if (isSelected) 2.dp(context) else 1.dp(context)
         holder.binding.cardCategory.setCardBackgroundColor(
-            if (isSelected) com.engine.core.manager.ThemeManager.getThemeColor(
-                context,
-                "colorSecondaryPrimaryLite"
-            ) else com.engine.core.manager.ThemeManager.getThemeColor(context, "colorSurface")
+            ContextCompat.getColor(context, if (isSelected) R.color.v2_accent_soft else R.color.v2_card)
         )
-        holder.binding.tvCategoryName.setTextColor(if (isSelected) accentColor else onSurfaceColor)
+        holder.binding.ivSelected.visibility = if (isSelected) View.VISIBLE else View.GONE
 
         holder.itemView.setOnClickListener {
             selectCategory(category.id)
@@ -59,6 +55,9 @@ class CategoryAdapter(
         selectedCategoryId = id
         notifyDataSetChanged()
     }
+
+    private fun Int.dp(context: android.content.Context): Int =
+        (this * context.resources.displayMetrics.density).toInt()
 
     fun updateData(newCategories: List<WoCategory>) {
         categories = newCategories

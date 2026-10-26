@@ -612,8 +612,7 @@ class PlayChapterActivity : BaseActivity() {
                     Player.STATE_BUFFERING -> showBuffering(true)
                     Player.STATE_READY -> {
                         showBuffering(false)
-                        binding.seekBar.max = controller.duration.toInt()
-                        binding.tvTotalTime.text = formatTime(controller.duration)
+                        syncDuration(controller)
 
                         if (!isInitialSeekDone && lastReportedProgress > 0 && controller.duration > 0) {
                             val seekPos = (lastReportedProgress.toFloat() / 100 * controller.duration).toLong()
@@ -631,7 +630,17 @@ class PlayChapterActivity : BaseActivity() {
             }
         })
         updatePlayPauseIcon(controller.isPlaying)
+        // Coming back to a chapter that is already playing / ready: no STATE_READY event fires again,
+        // so the total time and seekbar length must be read from the player right now.
+        syncDuration(controller)
         startPlaybackIfReady()
+    }
+
+    private fun syncDuration(controller: MediaController) {
+        val duration = controller.duration
+        if (duration <= 0) return
+        if (binding.seekBar.max != duration.toInt()) binding.seekBar.max = duration.toInt()
+        binding.tvTotalTime.text = formatTime(duration)
     }
     
     private fun startPlaybackIfReady() {
@@ -893,6 +902,7 @@ class PlayChapterActivity : BaseActivity() {
 
     private fun updateProgress() {
         val controller = this.controller ?: return
+        syncDuration(controller)
         binding.seekBar.progress = controller.currentPosition.toInt()
         binding.tvCurrentTime.text = formatTime(controller.currentPosition)
 

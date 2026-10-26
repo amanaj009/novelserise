@@ -10,13 +10,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
-    android:background="@drawable/bg_shop_card"
+    android:background="@drawable/v2_card"
     android:foreground="?attr/selectableItemBackground"
     android:orientation="vertical"
-    android:paddingStart="14dp"
-    android:paddingTop="14dp"
+    android:paddingStart="12dp"
+    android:paddingTop="10dp"
     android:paddingEnd="6dp"
-    android:paddingBottom="10dp">
+    android:paddingBottom="8dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,19 +26,19 @@
 
         <TextView
             android:id="@+id/tvChapterSqc"
-            android:layout_width="42dp"
-            android:layout_height="42dp"
-            android:background="@drawable/bg_chapter_number"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/v2_number_tile"
             android:gravity="center"
-            android:textColor="#FF4F8B"
-            android:textSize="16sp"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="13sp"
             android:textStyle="bold"
             tools:text="3" />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="10dp"
             android:layout_weight="1"
             android:orientation="vertical">
 
@@ -49,7 +49,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:textColor="?attr/colorOnSurface"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 tools:text="V - Chapter 3" />
 
@@ -57,7 +57,7 @@
                 android:id="@+id/layoutMeta"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="1dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -116,9 +116,9 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:background="@drawable/bg_writer_divider" />
+        android:background="@color/v2_divider" />
 
     <!-- Publish switch, status and schedule -->
     <LinearLayout
@@ -133,7 +133,7 @@
             android:id="@+id/tvStatusLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_status_draft"
+            android:background="@drawable/v2_status_draft"
             android:paddingHorizontal="9dp"
             android:paddingVertical="3dp"
             android:textSize="11sp"
@@ -156,14 +156,14 @@
                 android:layout_height="13dp"
                 android:importantForAccessibility="no"
                 android:src="@drawable/ic_timer"
-                app:tint="#38BDF8" />
+                app:tint="@color/v2_blue_text" />
 
             <TextView
                 android:id="@+id/tvScheduledAt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:textColor="#38BDF8"
+                android:textColor="@color/v2_blue_text"
                 android:textSize="11sp"
                 android:textStyle="bold"
                 tools:text="2026-10-01 10:00" />
@@ -187,8 +187,8 @@
             android:layout_width="wrap_content"
             android:layout_height="40dp"
             android:minHeight="0dp"
-            app:thumbTint="@color/writer_switch_thumb"
-            app:trackTint="@color/writer_switch_track" />
+            app:thumbTint="@color/v2_switch_thumb"
+            app:trackTint="@color/v2_switch_track" />
     </LinearLayout>
 
     <!-- Background publish / upload progress -->
@@ -196,9 +196,11 @@
         android:id="@+id/layoutProgress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="6dp"
         android:layout_marginEnd="8dp"
+        android:background="@drawable/v2_progress_box"
         android:orientation="vertical"
+        android:padding="10dp"
         android:visibility="gone"
         tools:visibility="visible">
 
@@ -207,8 +209,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:progress="0"
-            app:indicatorColor="#FF4F8B"
-            app:trackColor="@color/shop_card_stroke"
+            app:indicatorColor="@color/v2_accent"
+            app:trackColor="@color/v2_card_stroke"
             app:trackCornerRadius="2dp"
             app:trackThickness="4dp" />
 
@@ -217,7 +219,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:textColor="#FF4F8B"
+            android:textColor="@color/v2_accent_text"
             android:textSize="11sp"
             tools:text="Uploading... 40%" />
     </LinearLayout>

@@ -281,7 +281,7 @@ class HomeSectionAdapter(items: List<HomeFeedItem>, private val adView: View? = 
             
             binding.tvSeeAll.visibility = if (section.sectionId != 0) View.VISIBLE else View.GONE
             binding.tvSeeAll.setOnClickListener {
-                HomeSectionNovelByIdActivity.start(it.context, section.sectionId, section.title, section.key)
+                HomeSectionNovelByIdActivity.start(it.context, section.sectionId, section.title, section.key, section.novels)
             }
 
             // No separate #1 hero card (hidden in the layout): every ranked novel sits in the same
@@ -315,7 +315,7 @@ class HomeSectionAdapter(items: List<HomeFeedItem>, private val adView: View? = 
             
             binding.btnViewAll.visibility = if (section.sectionId != 0) View.VISIBLE else View.GONE
             binding.btnViewAll.setOnClickListener {
-                HomeSectionNovelByIdActivity.start(it.context, section.sectionId, section.title, section.key)
+                HomeSectionNovelByIdActivity.start(it.context, section.sectionId, section.title, section.key, section.novels)
             }
 
             // Two rows like "Highest Rated"; a single row only when there are too few novels to fill two.

@@ -283,4 +283,87 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">8dp</item>
     </style>
+
+    <!-- Writer redesign (v2): warm cream surfaces + pink accent. Resolves to night colours automatically. -->
+    <style name="Theme.NovelSerise.V2" parent="Theme.NovelSerise">
+        <item name="colorSurface">@color/v2_bg</item>
+        <item name="colorOnSurface">@color/v2_text</item>
+        <item name="colorOnSurfaceVariant">@color/v2_text_muted</item>
+        <item name="colorSurfaceVariant">@color/v2_track</item>
+        <item name="colorOutline">@color/v2_border</item>
+        <item name="colorPrimary">@color/v2_accent</item>
+        <item name="colorOnPrimary">@color/v2_on_accent</item>
+        <item name="android:textColorHint">@color/v2_hint</item>
+        <item name="appStatusBarColor">@color/v2_bg</item>
+        <item name="appNavigationBarColor">@color/v2_bg</item>
+        <item name="appWindowBackground">@color/v2_bg</item>
+    </style>
+
+    <!-- Segmented control item (writer v2) -->
+    <style name="V2SegItem">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingStart">14dp</item>
+        <item name="android:paddingEnd">14dp</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/v2_text_muted</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+    </style>
+
+    <!-- Create novel wizard (writer v2) -->
+    <style name="V2StepKicker">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/v2_accent_text</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0.08</item>
+    </style>
+
+    <style name="V2StepTitle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">6dp</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:textSize">28sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">-0.02</item>
+    </style>
+
+    <style name="V2StepSub">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">6dp</item>
+        <item name="android:textColor">?attr/colorOnSurfaceVariant</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:lineSpacingExtra">2dp</item>
+    </style>
+
+    <style name="V2FieldLabel">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">?attr/colorOnSurfaceVariant</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:letterSpacing">0.08</item>
+    </style>
+
+    <style name="V2SegButton" parent="Widget.MaterialComponents.Button.UnelevatedButton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">40dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:checkable">true</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/v2_seg_btn_text</item>
+        <item name="backgroundTint">@color/v2_seg_btn_bg</item>
+        <item name="cornerRadius">18dp</item>
+        <item name="rippleColor">@color/v2_accent_soft</item>
+        <item name="strokeWidth">0dp</item>
+    </style>
 </resources>

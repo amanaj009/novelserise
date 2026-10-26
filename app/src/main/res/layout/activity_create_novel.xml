@@ -4,6 +4,11 @@
   ~
   -->
 
+<!--
+  Create / edit novel (writer v2): a four step flow inside one screen.
+  Step 1 idea (title + description), step 2 genre, step 3 covers, step 4 review + publish settings.
+  The bottom button is "Next" on steps 1-3 and "Create / Update story" on step 4.
+-->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -12,315 +17,676 @@
     android:layout_height="match_parent"
     android:background="?attr/colorSurface">
 
-    <include
-        android:id="@+id/headerView"
-        layout="@layout/layout_toolbar" />
-
-    <androidx.core.widget.NestedScrollView
+    <!-- Top bar: back + step progress -->
+    <LinearLayout
+        android:id="@+id/layoutTopBar"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:clipToPadding="false"
-        android:paddingBottom="100dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/headerView">
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="20dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="20dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/v2_icon_btn"
+            android:contentDescription="Back"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
+            android:padding="11dp"
+            android:src="@drawable/ic_back"
+            app:tint="?attr/colorOnSurface" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:layout_marginStart="14dp"
+            android:layout_marginEnd="14dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
-            <!-- Image Section: 2:3 and 16:9 in one line -->
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <View
+                android:id="@+id/seg1"
+                android:layout_width="0dp"
+                android:layout_height="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/v2_seg_on" />
+
+            <View
+                android:id="@+id/seg2"
+                android:layout_width="0dp"
+                android:layout_height="5dp"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/v2_seg_off" />
+
+            <View
+                android:id="@+id/seg3"
+                android:layout_width="0dp"
+                android:layout_height="5dp"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/v2_seg_off" />
+
+            <View
+                android:id="@+id/seg4"
+                android:layout_width="0dp"
+                android:layout_height="5dp"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/v2_seg_off" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvStepCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            tools:text="1 / 4" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/saveButton"
+        app:layout_constraintTop_toBottomOf="@id/layoutTopBar">
+
+        <!-- ============ Step 1: idea ============ -->
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/step1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:fillViewport="true"
+            android:overScrollMode="never">
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp">
+                android:orientation="vertical"
+                android:paddingHorizontal="20dp"
+                android:paddingTop="22dp"
+                android:paddingBottom="16dp">
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/smallNovelCoverCard"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    app:cardBackgroundColor="?attr/colorSurfaceVariant"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="0dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintDimensionRatio="2:3"
-                    app:layout_constraintEnd_toStartOf="@+id/imagecoverCard"
-                    app:layout_constraintHorizontal_weight="1"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                <TextView
+                    style="@style/V2StepKicker"
+                    android:text="STEP 1" />
 
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                <TextView
+                    style="@style/V2StepTitle"
+                    android:text="What’s your story called?" />
 
-                        <ImageView
-                            android:id="@+id/smallNovelCover"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/ic_add" />
+                <TextView
+                    style="@style/V2StepSub"
+                    android:text="A title and a few lines is enough to start. You can change both later." />
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom"
-                            android:background="?attr/colorOnSurfaceVariant"
-                            android:alpha="0.8"
-                            android:gravity="center"
-                            android:padding="4dp"
-                            android:text="2:3 Cover"
-                            android:textColor="?attr/colorSurface"
-                            android:textSize="10sp" />
-                    </FrameLayout>
-                </androidx.cardview.widget.CardView>
+                <TextView
+                    style="@style/V2FieldLabel"
+                    android:layout_marginTop="22dp"
+                    android:text="NOVEL TITLE" />
 
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/imagecoverCard"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="12dp"
-                    app:cardBackgroundColor="?attr/colorSurfaceVariant"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="0dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintDimensionRatio="16:9"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_weight="2.67"
-                    app:layout_constraintStart_toEndOf="@+id/smallNovelCoverCard"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <ImageView
-                            android:id="@+id/imagecoverView"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/ic_add" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="bottom"
-                            android:background="?attr/colorOnSurfaceVariant"
-                            android:alpha="0.8"
-                            android:gravity="center"
-                            android:padding="4dp"
-                            android:text="16:9 Banner"
-                            android:textColor="?attr/colorSurface"
-                            android:textSize="10sp" />
-                    </FrameLayout>
-                </androidx.cardview.widget.CardView>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <!-- Basic Info Below Images -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:hint="Novel Title"
-                app:boxCornerRadiusBottomEnd="12dp"
-                app:boxCornerRadiusBottomStart="12dp"
-                app:boxCornerRadiusTopEnd="12dp"
-                app:boxCornerRadiusTopStart="12dp">
-
-                <com.google.android.material.textfield.TextInputEditText
+                <EditText
                     android:id="@+id/titleEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="64dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/v2_input_focus"
+                    android:hint="Type your title"
+                    android:importantForAutofill="no"
                     android:inputType="textCapWords"
+                    android:maxLines="1"
+                    android:paddingHorizontal="18dp"
                     android:textColor="?attr/colorOnSurface"
-                    android:textSize="14sp" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:textColorHint="?attr/colorOnSurfaceVariant"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/warningTextTop"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="This title is already taken!"
-                android:textColor="?attr/colorError"
-                android:textSize="12sp"
-                android:visibility="gone" />
+                <TextView
+                    android:id="@+id/warningTextTop"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="This title is already taken!"
+                    android:textColor="@color/v2_red_text"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
 
-            <!-- Description -->
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:hint="Description (Story Idea)"
-                app:boxCornerRadiusBottomEnd="12dp"
-                app:boxCornerRadiusBottomStart="12dp"
-                app:boxCornerRadiusTopEnd="12dp"
-                app:boxCornerRadiusTopStart="12dp">
+                <TextView
+                    android:id="@+id/tvTitleAvailable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:drawablePadding="6dp"
+                    android:gravity="center_vertical"
+                    android:text="Title is available"
+                    android:textColor="@color/v2_green_text"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    app:drawableStartCompat="@drawable/ic_check_small"
+                    app:drawableTint="@color/v2_green_text" />
 
-                <com.google.android.material.textfield.TextInputEditText
+                <TextView
+                    style="@style/V2FieldLabel"
+                    android:layout_marginTop="22dp"
+                    android:text="STORY IDEA" />
+
+                <EditText
                     android:id="@+id/ideaEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/v2_input"
                     android:gravity="top"
-                    android:inputType="textMultiLine"
-                    android:minLines="4"
+                    android:hint="Two or three lines: who is it about, and what goes wrong?"
+                    android:importantForAutofill="no"
+                    android:inputType="textCapSentences|textMultiLine"
+                    android:lineSpacingExtra="4dp"
+                    android:minLines="8"
+                    android:padding="18dp"
                     android:textColor="?attr/colorOnSurface"
-                    android:textSize="14sp" />
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:textColorHint="?attr/colorOnSurfaceVariant"
+                    android:textSize="15sp" />
 
-            <TextView
-                android:id="@+id/warningTextIdea"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:textColor="?attr/colorError"
-                android:textSize="12sp"
-                android:visibility="gone" />
-
-            <!-- Categories -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="Select Category"
-                android:textColor="?attr/colorOnSurface"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/subcategoryRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp" android:visibility="gone" />
-
-            <!-- Settings -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="Publishing Settings"
-                android:textColor="?attr/colorOnSurface"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <com.google.android.material.switchmaterial.SwitchMaterial
-                android:id="@+id/publishSwitch"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Make Public"
-                android:textColor="?attr/colorOnSurface" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Series Status"
-                android:textAllCaps="true"
-                android:textColor="?attr/colorOnSurface" />
-
-            <LinearLayout
-                android:id="@+id/statusToggleGroup"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnStatusRunning"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:layout_marginEnd="12dp"
-                    android:checkable="true"
-                    android:minWidth="120dp"
-                    android:text="Running"
-                    android:textAllCaps="true"
-                    android:textColor="@color/novel_status_button_text"
-                    app:backgroundTint="@color/novel_status_button_background"
-                    app:cornerRadius="24dp"
-                    app:strokeColor="@color/novel_status_button_stroke"
-                    app:strokeWidth="2dp" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnStatusCompleted"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:checkable="true"
-                    android:minWidth="132dp"
-                    android:text="Completed"
-                    android:textAllCaps="true"
-                    android:textColor="@color/novel_status_button_text"
-                    app:backgroundTint="@color/novel_status_button_background"
-                    app:cornerRadius="24dp"
-                    app:strokeColor="@color/novel_status_button_stroke"
-                    app:strokeWidth="2dp" />
-            </LinearLayout>
-
-            <!-- Policy Checkpoints -->
-            <LinearLayout
-                android:id="@+id/layoutPolicies"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:text="Policy Checkpoints"
-                    android:textColor="?attr/colorOnSurface"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <com.google.android.material.checkbox.MaterialCheckBox
-                    android:id="@+id/ownershipCheckbox"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="I confirm that I am the original author of this novel."
-                    android:textColor="?attr/colorOnSurface"
-                    app:buttonTint="?attr/colorPrimary" />
+                    android:orientation="horizontal">
 
-                <com.google.android.material.checkbox.MaterialCheckBox
-                    android:id="@+id/contentPolicyCheckbox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="I confirm that this novel does not contain 18+ or prohibited content."
-                    android:textColor="?attr/colorOnSurface"
-                    app:buttonTint="?attr/colorPrimary" />
+                    <TextView
+                        android:id="@+id/warningTextIdea"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/v2_red_text"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
 
-                <com.google.android.material.checkbox.MaterialCheckBox
-                    android:id="@+id/termsCheckbox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="I agree to follow the platform's writing guidelines."
-                    android:textColor="?attr/colorOnSurface"
-                    app:buttonTint="?attr/colorPrimary" />
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/tvIdeaCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0 / 500 words"
+                        android:textColor="?attr/colorOnSurfaceVariant"
+                        android:textSize="11sp" />
+                </LinearLayout>
             </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
 
-        </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
+        <!-- ============ Step 2: genre ============ -->
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/step2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:fillViewport="true"
+            android:overScrollMode="never"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="20dp"
+                android:paddingTop="22dp"
+                android:paddingBottom="16dp">
+
+                <TextView
+                    style="@style/V2StepKicker"
+                    android:text="STEP 2" />
+
+                <TextView
+                    style="@style/V2StepTitle"
+                    android:text="Pick a genre" />
+
+                <TextView
+                    style="@style/V2StepSub"
+                    android:text="Readers browse by genre first, so choose the one that fits best." />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:nestedScrollingEnabled="false"
+                    android:overScrollMode="never" />
+
+                <LinearLayout
+                    android:id="@+id/layoutSubcategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    tools:visibility="visible">
+
+                    <TextView
+                        style="@style/V2FieldLabel"
+                        android:text="NARROW IT DOWN" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/subcategoryRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:overScrollMode="never" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <!-- ============ Step 3: covers ============ -->
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/step3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:fillViewport="true"
+            android:overScrollMode="never"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="20dp"
+                android:paddingTop="22dp"
+                android:paddingBottom="16dp">
+
+                <TextView
+                    style="@style/V2StepKicker"
+                    android:text="STEP 3" />
+
+                <TextView
+                    style="@style/V2StepTitle"
+                    android:text="Add your covers" />
+
+                <TextView
+                    style="@style/V2StepSub"
+                    android:text="This is how your story will look to readers." />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_marginTop="22dp">
+
+                    <!-- 16:9 banner -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/imagecoverCard"
+                        android:layout_width="match_parent"
+                        android:layout_height="192dp"
+                        app:cardBackgroundColor="?attr/colorSurface"
+                        app:cardCornerRadius="22dp"
+                        app:cardElevation="0dp">
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/v2_upload_dashed">
+
+                            <ImageView
+                                android:id="@+id/imagecoverView"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:contentDescription="Add 16 by 9 banner"
+                                android:padding="68dp"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/ic_add" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="top|end"
+                                android:layout_margin="12dp"
+                                android:background="@drawable/v2_btn_soft"
+                                android:paddingHorizontal="10dp"
+                                android:paddingVertical="4dp"
+                                android:text="Wide banner · 16:9"
+                                android:textColor="@color/v2_accent_text"
+                                android:textSize="11sp"
+                                android:textStyle="bold" />
+                        </FrameLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- 2:3 book cover, overlapping the banner -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/smallNovelCoverCard"
+                        android:layout_width="120dp"
+                        android:layout_height="180dp"
+                        android:layout_marginStart="18dp"
+                        android:layout_marginTop="112dp"
+                        app:cardBackgroundColor="?attr/colorSurface"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="0dp">
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="4dp">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                app:cardBackgroundColor="@color/v2_card"
+                                app:cardCornerRadius="16dp"
+                                app:cardElevation="0dp">
+
+                                <ImageView
+                                    android:id="@+id/smallNovelCover"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:contentDescription="Add 2 by 3 book cover"
+                                    android:padding="40dp"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/ic_add" />
+                            </androidx.cardview.widget.CardView>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom|center_horizontal"
+                                android:layout_marginBottom="12dp"
+                                android:background="@drawable/v2_btn_soft"
+                                android:paddingHorizontal="10dp"
+                                android:paddingVertical="4dp"
+                                android:text="Book cover · 2:3"
+                                android:textColor="@color/v2_accent_text"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+                        </FrameLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
+                        android:layout_marginStart="150dp"
+                        android:layout_marginBottom="4dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="REQUIRED"
+                            android:textColor="@color/v2_accent_text"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="Book cover shows in lists and search. The banner is used on the home screen."
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </FrameLayout>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <!-- ============ Step 4: review ============ -->
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/step4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:fillViewport="true"
+            android:overScrollMode="never"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="20dp"
+                android:paddingTop="22dp"
+                android:paddingBottom="16dp">
+
+                <TextView
+                    style="@style/V2StepKicker"
+                    android:text="STEP 4" />
+
+                <TextView
+                    style="@style/V2StepTitle"
+                    android:text="Almost there" />
+
+                <TextView
+                    style="@style/V2StepSub"
+                    android:text="Check the details and confirm to create your story." />
+
+                <!-- Summary -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/v2_card_lg"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="14dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="64dp"
+                        android:layout_height="96dp"
+                        app:cardBackgroundColor="@color/v2_accent_soft"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="0dp">
+
+                        <ImageView
+                            android:id="@+id/ivReviewCover"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:importantForAccessibility="no"
+                            android:scaleType="centerCrop" />
+                    </androidx.cardview.widget.CardView>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="14dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvReviewTitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:ellipsize="end"
+                            android:maxLines="2"
+                            android:textColor="?attr/colorOnSurface"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            tools:text="Your title here" />
+
+                        <TextView
+                            android:id="@+id/tvReviewMeta"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:ellipsize="end"
+                            android:maxLines="1"
+                            android:textColor="?attr/colorOnSurfaceVariant"
+                            android:textSize="12sp"
+                            tools:text="Romance · Love story" />
+
+                        <TextView
+                            android:id="@+id/tvReviewStatus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/v2_btn_soft"
+                            android:paddingHorizontal="10dp"
+                            android:paddingVertical="4dp"
+                            android:textColor="@color/v2_accent_text"
+                            android:textSize="11sp"
+                            android:textStyle="bold"
+                            tools:text="Running" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Publishing -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:background="@drawable/v2_card_lg"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="4dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:minHeight="60dp"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Make public"
+                                android:textColor="?attr/colorOnSurface"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Readers can find this story"
+                                android:textColor="?attr/colorOnSurfaceVariant"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                        <com.google.android.material.switchmaterial.SwitchMaterial
+                            android:id="@+id/publishSwitch"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:thumbTint="@color/v2_switch_thumb"
+                            app:trackTint="@color/v2_switch_track" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/v2_divider" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="Series status"
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:id="@+id/statusToggleGroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="14dp"
+                        android:background="@drawable/v2_seg_track"
+                        android:orientation="horizontal"
+                        android:padding="4dp">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnStatusRunning"
+                            style="@style/V2SegButton"
+                            android:text="Running" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnStatusCompleted"
+                            style="@style/V2SegButton"
+                            android:text="Completed" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Policy checkpoints (new novels only) -->
+                <LinearLayout
+                    android:id="@+id/layoutPolicies"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:background="@drawable/v2_card_lg"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="2dp">
+
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/ownershipCheckbox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="52dp"
+                        android:text="I am the original author of this novel."
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="13sp"
+                        app:buttonTint="@color/v2_accent" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/v2_divider" />
+
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/contentPolicyCheckbox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="52dp"
+                        android:text="It has no 18+ or prohibited content."
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="13sp"
+                        app:buttonTint="@color/v2_accent" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/v2_divider" />
+
+                    <com.google.android.material.checkbox.MaterialCheckBox
+                        android:id="@+id/termsCheckbox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="52dp"
+                        android:text="I agree to the platform’s writing guidelines."
+                        android:textColor="?attr/colorOnSurface"
+                        android:textSize="13sp"
+                        app:buttonTint="@color/v2_accent" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </FrameLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/saveButton"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:layout_margin="16dp"
-        android:text="Create Story"
-        android:textColor="?attr/colorOnPrimary"
-        app:backgroundTint="?attr/colorPrimary"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="16dp"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="Next · Genre"
+        android:textAllCaps="false"
+        android:textColor="@color/v2_on_accent"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:backgroundTint="@color/v2_accent"
         app:cornerRadius="28dp"
         app:layout_constraintBottom_toBottomOf="parent" />
 
@@ -328,7 +694,7 @@
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:indeterminateTint="?attr/colorPrimary"
+        android:indeterminateTint="@color/v2_accent"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
