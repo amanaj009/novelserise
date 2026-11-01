@@ -10,6 +10,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.engine.core.helper.ImageHelper
+import com.writer_hub.novelserise.R
 import com.writer_hub.novelserise.databinding.ItemSearchCategoryBinding
 
 class SearchCategoryAdapter(
@@ -45,8 +47,19 @@ class SearchCategoryAdapter(
     inner class CategoryViewHolder(private val binding: ItemSearchCategoryBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(category: WoCategory) {
             binding.categoryName.text = category.name
-            // You can add logic for image loading here if category.image is used
-            // For now, let's just display the name.
+            val novelCount = category.novel_count ?: 0
+            binding.categoryCount.text = "$novelCount Stories"
+            binding.categoryCount.visibility = if (novelCount > 0) View.VISIBLE else View.GONE
+            val context = binding.root.context
+            val imageSize = (160 * context.resources.displayMetrics.density).toInt()
+            ImageHelper.loadImage(
+                context = context,
+                data = category.image,
+                imageView = binding.categoryImage,
+                placeholder = R.drawable.shimmer_placeholder,
+                targetWidthPx = imageSize,
+                targetHeightPx = (112 * context.resources.displayMetrics.density).toInt()
+            )
             binding.categoryCard.isSelected = category.id == selectedCategoryId
             if (category.id == selectedCategoryId) {
                 binding.categoryName.alpha = 1.0f

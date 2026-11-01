@@ -189,8 +189,10 @@ class CommentsFragment : Fragment() {
         viewModel = AppProvider.getUniqueViewModel(requireActivity().application, WoChpterViewModel::class.java, novelId)
         reportViewModel = AppProvider.getViewModel(requireActivity().application, ReportViewModel::class.java)
 
-        // Hide input by default until we know if user has commented
-        binding.commentInputLayout.visibility = View.GONE
+        // Show the composer as soon as the tab opens; hide it only when the current
+        // chapter data confirms that the user already has a top-level comment.
+        hasMyComment = GlobalAppData.currentlyPlayingChapter.value?.isCommented == "1"
+        binding.commentInputLayout.visibility = if (hasMyComment) View.GONE else View.VISIBLE
 
         setupRecyclerView()
         

@@ -5,9 +5,11 @@
 
 package com.writer_hub.novelserise.adapter
 
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import androidx.core.widget.ImageViewCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -18,6 +20,7 @@ import com.engine.core.helper.decodeHtmlToTextV2
 import com.engine.core.helper.getTimeAgo
 import com.engine.core.models.CommentData
 import com.engine.core.helper.ImageHelper
+import com.engine.core.utill.ThemeUtils
 
 class PostCommentAdapter(
     private val onLikeClick: (CommentData) -> Unit,
@@ -57,9 +60,19 @@ class PostCommentAdapter(
             }
 
             // Using icons from storymania library
+            val isLiked = comment.isCommentLiked == true
             binding.ivLike.setImageResource(
-                if (comment.isCommentLiked == true) com.engine.core.R.drawable.ic_thumb_up_liked
+                if (isLiked) com.engine.core.R.drawable.ic_thumb_up_liked
                 else com.engine.core.R.drawable.ic_thumb_up_unlike
+            )
+            val likeTintAttr = if (isLiked) {
+                androidx.appcompat.R.attr.colorPrimary
+            } else {
+                com.google.android.material.R.attr.colorOnSurfaceVariant
+            }
+            ImageViewCompat.setImageTintList(
+                binding.ivLike,
+                ColorStateList.valueOf(ThemeUtils.getThemeColor(context, likeTintAttr))
             )
 
             val (_, currentUserId) = tokenManager.getTokenAndUserId()

@@ -145,13 +145,13 @@ class ChapterCommentAdapter(
                 com.engine.core.R.drawable.ic_thumb_up_unlike
             }
             binding.ivLike.setImageResource(likeIcon)
-
-            if (comment.isCommentLiked) {
-                 ImageViewCompat.setImageTintList(binding.ivLike, null)
+            val likeTintAttr = if (comment.isCommentLiked) {
+                androidx.appcompat.R.attr.colorPrimary
             } else {
-                 val color = resolveColor(context, com.google.android.material.R.attr.colorOnSurfaceVariant)
-                 ImageViewCompat.setImageTintList(binding.ivLike, ColorStateList.valueOf(color))
+                com.google.android.material.R.attr.colorOnSurfaceVariant
             }
+            val likeTint = resolveColor(context, likeTintAttr)
+            ImageViewCompat.setImageTintList(binding.ivLike, ColorStateList.valueOf(likeTint))
 
             binding.ivLike.setOnClickListener { onLikeClick(comment) }
             binding.ivReply.setOnClickListener { onReplyClick(comment) }

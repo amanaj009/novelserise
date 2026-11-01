@@ -543,10 +543,11 @@ class AudioPlayerActivity : BaseActivity() {
         binding.btnBack.setOnClickListener { binding.dragRoot.dismiss() }
         binding.btnShare.setOnClickListener { shareChapter() }
         binding.btnMore.setOnClickListener { showMoreOptions() }
-        binding.btnViewFullScreen.setOnClickListener {
-            val intent = Intent(this, PlayChapterActivity::class.java).apply { addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT); putExtra("extra_chapter_id", chapterId); putExtra("extra_novel_id", novelId) }
-            startActivity(intent)
-        }
+        val openEpisodeDetails = View.OnClickListener { openEpisodeDetails() }
+        binding.infoRow.setOnClickListener(openEpisodeDetails)
+        binding.tvNovelTitle.setOnClickListener(openEpisodeDetails)
+        binding.tvChapterTitle.setOnClickListener(openEpisodeDetails)
+        binding.btnViewFullScreen.setOnClickListener(openEpisodeDetails)
         binding.btnPlayPause.setOnClickListener { val ctrl = this.controller ?: return@setOnClickListener; if (currentChapter != null && !canChapterBePlayed(currentChapter!!)) { showUnlockBottomSheet(); return@setOnClickListener }; if (ctrl.isPlaying) ctrl.pause() else if (ctrl.mediaItemCount == 0) currentChapter?.let { startPlayback(it) } else { if (ctrl.playbackState == Player.STATE_IDLE) ctrl.prepare(); ctrl.play() } }
         binding.btnForward.setOnClickListener { seekBy(10000) }
         binding.btnRewind.setOnClickListener { seekBy(-10000) }
@@ -598,6 +599,17 @@ class AudioPlayerActivity : BaseActivity() {
     }
 
     private fun getColorFromAttr(attr: Int): Int { val tv = android.util.TypedValue(); theme.resolveAttribute(attr, tv, true); return tv.data }
+
+    private fun openEpisodeDetails() {
+        val currentChapterId = chapterId ?: return
+        val currentNovelId = novelId ?: return
+        val intent = Intent(this, PlayChapterActivity::class.java).apply {
+            addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+            putExtra("extra_chapter_id", currentChapterId)
+            putExtra("extra_novel_id", currentNovelId)
+        }
+        startActivity(intent)
+    }
 
     private fun showMoreOptions() { val opt = arrayOf("Share", "Report", "Details"); AlertDialog.Builder(this).setItems(opt) { _, w -> when (w) { 0 -> shareChapter(); 1 -> showReportDialog(); 2 -> binding.btnViewFullScreen.performClick() } }.show() }
 

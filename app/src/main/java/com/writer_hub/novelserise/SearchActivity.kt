@@ -121,7 +121,6 @@ class SearchActivity : BaseActivity() {
         searchViewModel.categories.observe(this) { categories ->
             val popularCategories = categories
                 .sortedByDescending { it.novel_count ?: 0 }
-                .take(8)
             categoryAdapter.updateData(popularCategories)
             if (binding.etSearch.text.isNullOrBlank()) {
                 binding.layoutCategories.visibility = View.VISIBLE

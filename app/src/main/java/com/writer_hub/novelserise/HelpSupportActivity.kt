@@ -5,15 +5,12 @@
 
 package com.writer_hub.novelserise
 
-import com.engine.core.manager.GlobalAppData
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.writer_hub.novelserise.databinding.ActivityHelpSupportBinding
 
 class HelpSupportActivity : BaseActivity() {
@@ -21,6 +18,13 @@ class HelpSupportActivity : BaseActivity() {
     private lateinit var binding: ActivityHelpSupportBinding
 
     companion object {
+        private const val SUPPORT_EMAIL = "novelseries9@gmail.com"
+        private const val WHATSAPP_URL = "https://wa.me/message/RQGISU3I75V6P1"
+        private const val TELEGRAM_URL = "https://t.me/The_Horror_Hunter"
+        private const val INSTAGRAM_URL = "https://www.instagram.com/the_horror_hunter?igsh=ODJwbWRrNW9mcm9o"
+        private const val YOUTUBE_URL = "https://www.youtube.com/channel/UCAz9S8jpCKAdEf1_YHKUiMg"
+        private const val FACEBOOK_URL = "https://www.facebook.com/share/1M6mB6knGE/"
+
         fun start(context: Context) {
             val intent = Intent(context, HelpSupportActivity::class.java)
             context.startActivity(intent)
@@ -35,11 +39,6 @@ class HelpSupportActivity : BaseActivity() {
         setupToolbar()
         loadContactInfo()
         setupListeners()
-        
-        // Final fallback to ensure something is always shown
-        if (binding.tvEmail.text.isNullOrEmpty()) {
-            binding.tvEmail.text = "support@novelseries.com"
-        }
     }
 
     private fun setupToolbar() {
@@ -57,34 +56,14 @@ class HelpSupportActivity : BaseActivity() {
     }
 
     private fun loadContactInfo() {
-        // Observe LiveData in case settings are updated asynchronously
-        GlobalAppData.siteSettingsLiveData.observe(this) { settings ->
-            settings?.config?.let {
-                Log.d("HelpSupport", "Settings updated: ${it.siteEmail}")
-                if (!it.siteEmail.isNullOrBlank()) {
-                    binding.tvEmail.text = it.siteEmail
-                }
-            }
-        }
-
-        // Also check immediate value
-        val config = GlobalAppData.siteSettings?.config
-        config?.let {
-            Log.d("HelpSupport", "Immediate config found: ${it.siteEmail}")
-            if (!it.siteEmail.isNullOrBlank()) {
-                binding.tvEmail.text = it.siteEmail
-            }
-        }
+        binding.tvEmail.text = SUPPORT_EMAIL
     }
 
     private fun setupListeners() {
-        val config = GlobalAppData.siteSettings?.config
-
         binding.cardEmail.setOnClickListener {
-            val email = if (config?.siteEmail.isNullOrBlank()) "support@novelseries.com" else config!!.siteEmail
             val intent = Intent(Intent.ACTION_SENDTO).apply {
-                data = Uri.parse("mailto:")
-                putExtra(Intent.EXTRA_EMAIL, arrayOf(email))
+                data = Uri.parse("mailto:$SUPPORT_EMAIL")
+                putExtra(Intent.EXTRA_EMAIL, arrayOf(SUPPORT_EMAIL))
                 putExtra(Intent.EXTRA_SUBJECT, "Support Request: ${getString(R.string.app_name)}")
             }
             try {
@@ -95,15 +74,13 @@ class HelpSupportActivity : BaseActivity() {
         }
 
         binding.cardWhatsApp.setOnClickListener {
-            // Priority: WhatsApp from config (if available), then social link, then default
-            val whatsappUrl = "https://wa.me/919999999999" // TODO: Add to config if needed
-            openUrl(whatsappUrl)
+            openUrl(WHATSAPP_URL)
         }
 
-        binding.ivFacebook.setOnClickListener { config?.facebookLink?.let { openUrl(it) } }
-        binding.ivInstagram.setOnClickListener { config?.instagramLink?.let { openUrl(it) } }
-        binding.ivTelegram.setOnClickListener { config?.telegramLink?.let { openUrl(it) } }
-        binding.ivYouTube.setOnClickListener { config?.youtubeLink?.let { openUrl(it) } }
+        binding.ivFacebook.setOnClickListener { openUrl(FACEBOOK_URL) }
+        binding.ivInstagram.setOnClickListener { openUrl(INSTAGRAM_URL) }
+        binding.ivTelegram.setOnClickListener { openUrl(TELEGRAM_URL) }
+        binding.ivYouTube.setOnClickListener { openUrl(YOUTUBE_URL) }
     }
 
     private fun openUrl(url: String?) {
