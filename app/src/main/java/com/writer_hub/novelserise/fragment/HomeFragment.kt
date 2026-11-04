@@ -167,7 +167,10 @@ class HomeFragment : Fragment() {
             }
 
             // Only show an item that matches the currently selected app mode.
-            if (featuredItem != null && isAdded && _binding != null) {
+            // The server answers "No featured novel found" with an item that has no id or title;
+            // showing that would pop up an empty card, so treat it as nothing to show.
+            val hasContent = featuredItem?.id != null && !featuredItem.title.isNullOrBlank()
+            if (featuredItem != null && hasContent && isAdded && _binding != null) {
                 val isItemAudio = featuredItem.createAudio == "1"
 
                 if (isAudioMode == isItemAudio) {
@@ -406,7 +409,12 @@ class HomeFragment : Fragment() {
             try {
                 val fetchedSections = novelViewModel.fetchNovelsInBulk(public = "1")
                 if (fetchedSections != null) {
-                    cachedSections = fetchedSections.filter { it.novels.isNotEmpty() }
+                    // Only the top banner stays; the middle banner shelves between sections are not shown.
+                    cachedSections = fetchedSections.filter {
+                        it.novels.isNotEmpty() &&
+                            !it.key.contains("middle", ignoreCase = true) &&
+                            !it.title.contains("middle", ignoreCase = true)
+                    }
                     renderFeed()
                 }
             } catch (e: Exception) {
@@ -421,12 +429,50 @@ class HomeFragment : Fragment() {
     }
 
     /**
+     * Tops up sections that came back with few novels (audio mode has a small catalogue) with novels
+     * from the other sections, so every shelf fills its two rows. Banners and the ordered sections
+     * (trending, newest, ranking) are left alone, since padding would break what they mean.
+     */
+    private fun fillThinSections(sections: List<HomepageNovelWithTitle>): List<HomepageNovelWithTitle> {
+        // Writer shelves must only ever hold that writer's own novels, so they are neither padded nor used as donors.
+        fun isWriterShelf(s: HomepageNovelWithTitle): Boolean {
+            val key = s.key.trim().lowercase()
+            val title = s.title.trim().lowercase()
+            return key.contains("writer") || key.contains("author") || title.contains("writer") || title.contains("author")
+        }
+
+        fun isFixed(s: HomepageNovelWithTitle): Boolean {
+            val key = s.key.trim().lowercase()
+            return key == "trending" || key == "latest_updates" || key == "most_viewed" ||
+                key.contains("banner") || key.contains("middle") || key.contains("showcase") || isWriterShelf(s)
+        }
+
+        val donors = sections.filterNot { s -> s.key.trim().lowercase().let { it.contains("banner") || it.contains("middle") || it.contains("showcase") } || isWriterShelf(s) }
+            .flatMap { it.novels }
+            .filter { !it.imageLink.isNullOrBlank() }
+            .distinctBy { it.id }
+        if (donors.isEmpty()) return sections
+
+        return sections.mapIndexed { index, section ->
+            val missing = SECTION_FILL_TARGET - section.novels.size
+            if (missing <= 0 || isFixed(section)) return@mapIndexed section
+            val have = section.novels.mapTo(HashSet()) { it.id }
+            val candidates = donors.filter { it.id !in have }
+            if (candidates.isEmpty()) return@mapIndexed section
+            // Start each section at a different offset so shelves are not all padded with the same covers.
+            val start = (index * 3) % candidates.size
+            val extra = (candidates.drop(start) + candidates.take(start)).take(missing)
+            section.copy(novels = section.novels + extra)
+        }
+    }
+
+    /**
      * Feed order: quick actions, continue card, genre chips, first section, ad,
      * "Because you listened to ..." picks, then the remaining sections.
      */
     private fun renderFeed() {
         val binding = _binding ?: return
-        val sections = cachedSections ?: return
+        val sections = cachedSections?.let { fillThinSections(it) } ?: return
         loadBecauseYou()
         val items = mutableListOf<HomeFeedItem>(HomeFeedItem.PremiumOptionsItem)
 
@@ -497,3 +543,6 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 }
+
+/** Novels a general home shelf shows (two rows of five); thinner sections are topped up to this. */
+private const val SECTION_FILL_TARGET = 10

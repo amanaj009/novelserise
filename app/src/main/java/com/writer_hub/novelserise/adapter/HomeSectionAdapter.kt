@@ -91,6 +91,8 @@ class HomeSectionAdapter(items: List<HomeFeedItem>, private val adView: View? = 
     private val TYPE_CONTINUE_READING = 4
     private val TYPE_GENRES = 5
     private val TYPE_AD = 6
+    private val TYPE_NEWEST_UPDATES = 7
+    private val TYPE_RANKING = 8
 
     // Color palettes (Resources managed)
     private val lightColorRes = listOf(
@@ -124,6 +126,8 @@ class HomeSectionAdapter(items: List<HomeFeedItem>, private val adView: View? = 
                 val section = item.section
                 when {
                     section.key == "trending" -> TYPE_TRENDING
+                    section.key.trim().equals("latest_updates", ignoreCase = true) && section.novels.isNotEmpty() -> TYPE_NEWEST_UPDATES
+                    section.key.trim().equals("most_viewed", ignoreCase = true) && section.novels.isNotEmpty() -> TYPE_RANKING
                     isBannerSection(section) -> TYPE_BANNER
                     else -> TYPE_GENERAL
                 }
@@ -148,6 +152,8 @@ class HomeSectionAdapter(items: List<HomeFeedItem>, private val adView: View? = 
             TYPE_GENERAL -> GeneralSectionViewHolder(ItemHomeSectionBinding.inflate(inflater, parent, false))
             TYPE_PREMIUM_OPTIONS -> PremiumOptionsViewHolder(WidgetPremiumOptionsBinding.inflate(inflater, parent, false))
             TYPE_BANNER -> BannerSectionViewHolder(ItemHomeSectionBinding.inflate(inflater, parent, false))
+            TYPE_NEWEST_UPDATES -> NewestUpdatesViewHolder(ItemHomeSectionBinding.inflate(inflater, parent, false))
+            TYPE_RANKING -> RankingViewHolder(ItemHomeSectionBinding.inflate(inflater, parent, false))
             TYPE_CONTINUE_READING -> ContinueReadingViewHolder(ItemContinueReadingBinding.inflate(inflater, parent, false))
             TYPE_GENRES -> GenresViewHolder(ItemHomeGenresBinding.inflate(inflater, parent, false))
             TYPE_AD -> AdViewHolder(ItemHomeAdBinding.inflate(inflater, parent, false))
@@ -164,6 +170,8 @@ class HomeSectionAdapter(items: List<HomeFeedItem>, private val adView: View? = 
             is TrendingSectionViewHolder -> if (item is HomeFeedItem.SectionItem) holder.bind(item.section, color)
             is GeneralSectionViewHolder -> if (item is HomeFeedItem.SectionItem) holder.bind(item.section, color)
             is BannerSectionViewHolder -> if (item is HomeFeedItem.SectionItem) holder.bind(item.section)
+            is NewestUpdatesViewHolder -> if (item is HomeFeedItem.SectionItem) holder.bind(item.section, color)
+            is RankingViewHolder -> if (item is HomeFeedItem.SectionItem) holder.bind(item.section, color)
             is PremiumOptionsViewHolder -> holder.bind()
             is ContinueReadingViewHolder -> if (item is HomeFeedItem.ContinueReadingItem) holder.bind(item)
             is GenresViewHolder -> if (item is HomeFeedItem.GenresItem) holder.bind(item.categories)
@@ -328,6 +336,62 @@ class HomeSectionAdapter(items: List<HomeFeedItem>, private val adView: View? = 
             if (grid.spanCount != spanCount) grid.spanCount = spanCount
             val adapter = binding.rvSectionNovels.adapter as? FeaturedNovelAdapter
             if (adapter == null) binding.rvSectionNovels.adapter = FeaturedNovelAdapter(displayNovels) else adapter.submit(displayNovels)
+        }
+    }
+
+    /** "Newest Updates": three wide rows per page that swipe sideways, the next page peeking in. */
+    inner class NewestUpdatesViewHolder(private val binding: ItemHomeSectionBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        private val grid = GridLayoutManager(binding.root.context, 3, GridLayoutManager.HORIZONTAL, false)
+
+        init {
+            binding.rvSectionNovels.apply {
+                layoutManager = grid
+                setHasFixedSize(true)
+                itemAnimator = null
+            }
+        }
+
+        fun bind(section: HomepageNovelWithTitle, color: Int) {
+            binding.tvSectionTitle.text = DisplayText.of(section.title)
+            binding.sectionCard.paintSection(color)
+            bindViewAll(binding, section)
+
+            val novels = section.novels.take(12)
+            val rows = minOf(3, novels.size)
+            if (grid.spanCount != rows) grid.spanCount = rows
+            val adapter = binding.rvSectionNovels.adapter as? NewestUpdateAdapter
+            if (adapter == null) binding.rvSectionNovels.adapter = NewestUpdateAdapter(novels) else adapter.submit(novels)
+        }
+    }
+
+    /** Ranking: sideways-swiping cards, each listing three ranked novels with badge and views. */
+    inner class RankingViewHolder(private val binding: ItemHomeSectionBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        init {
+            binding.rvSectionNovels.apply {
+                layoutManager = LinearLayoutManager(binding.root.context, LinearLayoutManager.HORIZONTAL, false)
+                setHasFixedSize(true)
+                itemAnimator = null
+            }
+        }
+
+        fun bind(section: HomepageNovelWithTitle, color: Int) {
+            binding.tvSectionTitle.text = DisplayText.of(section.title)
+            binding.sectionCard.paintSection(color)
+            bindViewAll(binding, section)
+
+            val novels = section.novels.take(RankingCardAdapter.PER_CARD * 3)
+            val adapter = binding.rvSectionNovels.adapter as? RankingCardAdapter
+            if (adapter == null) binding.rvSectionNovels.adapter = RankingCardAdapter(novels) else adapter.submit(novels)
+        }
+    }
+
+    private fun bindViewAll(binding: ItemHomeSectionBinding, section: HomepageNovelWithTitle) {
+        binding.btnViewAll.visibility = if (section.sectionId != 0) View.VISIBLE else View.GONE
+        binding.btnViewAll.setOnClickListener {
+            HomeSectionNovelByIdActivity.start(it.context, section.sectionId, section.title, section.key, section.novels)
         }
     }
 
