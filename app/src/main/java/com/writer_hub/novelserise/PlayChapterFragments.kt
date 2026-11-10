@@ -60,6 +60,7 @@ class ChaptersFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var viewModel: WoChpterViewModel
     private lateinit var adapter: ChapterAdapter
+    private var scrolledToChapterId: String? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentPlayChapterChaptersBinding.inflate(inflater, container, false)
@@ -115,6 +116,7 @@ class ChaptersFragment : Fragment() {
             if (!pageList.isNullOrEmpty()) {
                 adapter.updateChapters(viewModel.chaptersFromFirstPage(pageList))
                 showLoadingFooter(viewModel.isLoading.value == true)
+                scrollToPlayingChapter()
             }
         }
 
@@ -153,6 +155,28 @@ class ChaptersFragment : Fragment() {
 
         GlobalAppData.currentlyPlayingChapter.observe(viewLifecycleOwner) {
             adapter.notifyDataSetChanged()
+            scrollToPlayingChapter()
+        }
+    }
+
+    /**
+     * Keeps the episode list on the chapter that is playing. If it sits on a page that is not loaded
+     * yet, the next page is requested until it turns up; each chapter is scrolled to only once so the
+     * user's own scrolling is not fought afterwards.
+     */
+    private fun scrollToPlayingChapter() {
+        val binding = _binding ?: return
+        val playingId = GlobalAppData.currentlyPlayingChapter.value?.id ?: return
+        if (playingId == scrolledToChapterId) return
+        val index = adapter.getChapters().indexOfFirst { it.id == playingId }
+        if (index < 0) {
+            loadNextPage()
+            return
+        }
+        scrolledToChapterId = playingId
+        binding.rvChapters.post {
+            val lm = _binding?.rvChapters?.layoutManager as? LinearLayoutManager ?: return@post
+            lm.scrollToPositionWithOffset(index, _binding!!.rvChapters.height / 3)
         }
     }
 

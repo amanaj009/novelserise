@@ -218,7 +218,8 @@ class AuthActivity : BaseActivity() {
                         MiniUser(result.userId!!, it.userName, it.name, it.avatar, result.accessToken!!, it.brandTag)
                     })
                 } else {
-                    ToastHelper.makeText(this@AuthActivity, "Login Failed: ${result.message}", Toast.LENGTH_SHORT).show()
+                    val reason = result.errorMessage ?: result.message ?: "Please try again"
+                    ToastHelper.makeText(this@AuthActivity, "Login Failed: $reason", Toast.LENGTH_SHORT).show()
                 }
             } catch (e: Exception) {
                 AlertUtils.dismissLoadingDialog()
@@ -286,9 +287,12 @@ class AuthActivity : BaseActivity() {
                     val idToken = credential.googleIdToken
                     if (idToken != null) {
                         loginWithSocialToken(idToken)
+                    } else {
+                        ToastHelper.makeText(this, "Google Sign-In failed", Toast.LENGTH_SHORT).show()
                     }
                 } catch (e: Exception) {
                     AppLoggerHelper.e(TAG, "Credential error: ${e.localizedMessage}")
+                    ToastHelper.makeText(this, "Google Sign-In failed", Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -306,7 +310,8 @@ class AuthActivity : BaseActivity() {
                         MiniUser(result.userId!!, it.userName, it.name, it.avatar, result.accessToken!!, it.brandTag)
                     })
                 } else {
-                    ToastHelper.makeText(this@AuthActivity, "Login Failed: ${result.message}", Toast.LENGTH_SHORT).show()
+                    val reason = result.errorMessage ?: result.message ?: "Please try again"
+                    ToastHelper.makeText(this@AuthActivity, "Login Failed: $reason", Toast.LENGTH_SHORT).show()
                 }
             } catch (e: Exception) {
                 AlertUtils.dismissLoadingDialog()
